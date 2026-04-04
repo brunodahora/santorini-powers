@@ -6,7 +6,7 @@ Incremental build-up from tooling setup → core logic → shared components →
 
 ## Tasks
 
-- [ ] 1. Install dependencies and configure tooling
+- [-] 1. Install dependencies and configure tooling
   - Install TanStack Router: `npm install @tanstack/react-router`
   - Install Shadcn/ui prerequisites (Tailwind CSS v4, tw-animate-css): `npm install tailwindcss @tailwindcss/vite tw-animate-css`
   - Initialize Shadcn: `npx shadcn@latest init` (choose default style, CSS variables)
@@ -245,6 +245,13 @@ Incremental build-up from tooling setup → core logic → shared components →
 
 - [ ] 18. Final checkpoint — Ensure all tests pass
   - Run `npx vitest --run` and confirm all tests pass. Ask the user if questions arise.
+
+- [ ] 19. Update README
+  - Write a clear project description explaining what the app is and why it exists
+  - Document all main features: randomization modes, Browse Gods, Game Modes, Settings, shareable links
+  - Add getting started section: prerequisites, install, dev server, build, tests
+  - List the expansion sets supported
+  - Add a brief tech stack section
 
 ## Notes
 
