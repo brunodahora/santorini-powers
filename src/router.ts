@@ -8,6 +8,7 @@ import { RootLayout } from "./routes/__root";
 import { SelectionScreen } from "./routes/index";
 import { OthersScreen } from "./routes/others";
 import { ResultScreen } from "./routes/result";
+import { SettingsScreen } from "./routes/settings";
 
 // Lazy placeholder components for routes not yet implemented
 function NotYetImplemented() {
@@ -41,7 +42,7 @@ const resultRoute = createRoute({
 const settingsRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/settings",
-  component: NotYetImplemented,
+  component: SettingsScreen,
 });
 
 const godsRoute = createRoute({

@@ -151,7 +151,7 @@ Incremental build-up from tooling setup → core logic → shared components →
 - [x] 10. Checkpoint — Ensure all tests pass
   - Run `npx vitest --run` and confirm all tests pass. Ask the user if questions arise.
 
-- [ ] 11. Implement Settings Screen (`src/routes/settings.tsx`)
+- [x] 11. Implement Settings Screen (`src/routes/settings.tsx`)
   - List all five expansions, each row: expansion image thumbnail + name + Shadcn `Checkbox` + "View Gods" link → `/expansion/$id`
   - Reads/writes active expansions via `useExpansions` hook
   - Warning banner + disabled back button when zero expansions selected
