@@ -194,20 +194,20 @@ Incremental build-up from tooling setup → core logic → shared components →
   - Verify layout renders correctly from 320px to 2560px viewport widths
   - _Requirements: 8.1, 8.2_
 
-- [ ] 17. Integration and unit tests (≥80% branch coverage, Testing Trophy approach)
+- [x] 17. Integration and unit tests (≥80% branch coverage, Testing Trophy approach)
   - Testing philosophy: mostly integration tests using React Testing Library + `@testing-library/user-event`, simulating real user flows. Unit tests only for pure logic modules.
   - Configure `@vitest/coverage-v8` with `branches: 80` threshold in `vitest.config.ts`
-  - [ ] 17.1 Unit tests for pure logic (`src/lib/*.test.ts`)
+  - [x] 17.1 Unit tests for pure logic (`src/lib/*.test.ts`)
     - `randomizer.test.ts`: `pickOne`, `pickTwo`, `pickMatchup` edge cases + property-based tests (Properties 1–4)
     - `storage.test.ts`: `loadExpansions` default, saved value, `SecurityError` fallback + property-based round-trip (Property 5)
     - `sprite.test.ts`: `getSpriteStyle` cell calculation + property-based test (Property 6)
     - `powers.test.ts`: static data integrity — matchup IDs exist, game mode col=0, BGA slugs (Properties 7–9)
-  - [ ] 17.2 Integration tests for Selection Screen (`src/routes/index.test.tsx`)
+  - [x] 17.2 Integration tests for Selection Screen (`src/routes/index.test.tsx`)
     - User sees 4 buttons; "Random Matchup" is disabled when no valid matchups for active expansions
     - User clicks "Pick One Power" → navigates to result screen
     - User clicks "Pick Two Powers" → navigates to result screen
     - User clicks "Others" → navigates to `/others`
-  - [ ] 17.3 Integration tests for Result Screen (`src/routes/result.test.tsx`)
+  - [x] 17.3 Integration tests for Result Screen (`src/routes/result.test.tsx`)
     - User sees single PowerCard when `mode=one`
     - User sees Carousel on mobile viewport when `mode=two`
     - User sees side-by-side layout on desktop when `mode=two`
@@ -216,37 +216,37 @@ Incremental build-up from tooling setup → core logic → shared components →
     - User clicks "Re-randomize" → new result shown
     - User clicks "Back" → returns to home
     - Invalid URL params → redirected to home
-  - [ ] 17.4 Integration tests for PowerCard (`src/components/PowerCard.test.tsx`)
+  - [x] 17.4 Integration tests for PowerCard (`src/components/PowerCard.test.tsx`)
     - User sees sprite on front face by default
     - User clicks card → back face with name and BGA link is shown
     - User clicks back face → front face is shown again
     - User clicks "Full Strategy" link → card does not flip
     - Sprite load error → power name fallback is shown
-  - [ ] 17.5 Integration tests for Settings Screen (`src/routes/settings.test.tsx`)
+  - [x] 17.5 Integration tests for Settings Screen (`src/routes/settings.test.tsx`)
     - User sees all 5 expansions with toggles
     - User toggles an expansion → change persists in localStorage
     - User deselects all expansions → back button is disabled with warning
     - User clicks "View Gods" link → navigates to expansion god list
-  - [ ] 17.6 Integration tests for Others Screen (`src/routes/others.test.tsx`)
+  - [x] 17.6 Integration tests for Others Screen (`src/routes/others.test.tsx`)
     - User sees 3 buttons: Browse Gods, Game Modes, Settings
     - Each button navigates to the correct route
     - Back button returns to home
-  - [ ] 17.7 Integration tests for Gods List and Expansion God List (`src/routes/gods.test.tsx`, `src/routes/expansion.test.tsx`)
+  - [x] 17.7 Integration tests for Gods List and Expansion God List (`src/routes/gods.test.tsx`, `src/routes/expansion.test.tsx`)
     - Gods list shows only powers from active expansions
     - User clicks a god → navigates to result screen
     - Expansion god list shows god names as links to result screen
-  - [ ] 17.8 Integration tests for Game Modes screens (`src/routes/game-modes.test.tsx`)
+  - [x] 17.8 Integration tests for Game Modes screens (`src/routes/game-modes.test.tsx`)
     - Game modes list shows only modes from active expansions
     - User clicks a game mode → navigates to detail screen with full-size rule card
     - Back button on detail screen returns to list
-  - [ ] 17.9 Run coverage report and verify ≥80% branch coverage
+  - [x] 17.9 Run coverage report and verify ≥80% branch coverage
     - Run `npx vitest --run --coverage`
     - Fix any branches below threshold before marking complete
 
-- [ ] 18. Final checkpoint — Ensure all tests pass
+- [x] 18. Final checkpoint — Ensure all tests pass
   - Run `npx vitest --run` and confirm all tests pass. Ask the user if questions arise.
 
-- [ ] 19. Update README
+- [x] 19. Update README
   - Write a clear project description explaining what the app is and why it exists
   - Document all main features: randomization modes, Browse Gods, Game Modes, Settings, shareable links
   - Add getting started section: prerequisites, install, dev server, build, tests

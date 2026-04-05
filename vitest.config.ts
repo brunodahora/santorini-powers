@@ -13,7 +13,16 @@ export default defineConfig({
     setupFiles: ["./src/test/setup.ts"],
     coverage: {
       provider: "v8",
-      branches: 80,
+      reporter: ["text", "text-summary"],
+      exclude: [
+        "src/components/ui/**",
+        "src/test/**",
+        "src/router.ts",
+        "src/main.tsx",
+      ],
+      thresholds: {
+        branches: 80,
+      },
     },
   },
 });

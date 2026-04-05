@@ -48,6 +48,43 @@ describe("Given an empty array was saved", () => {
   });
 });
 
+describe("Given localStorage throws a SecurityError (private browsing)", () => {
+  it("when loadExpansions is called, then it falls back to the default ['base']", () => {
+    const original = Object.getOwnPropertyDescriptor(window, "localStorage");
+    Object.defineProperty(window, "localStorage", {
+      get() {
+        throw new DOMException("SecurityError");
+      },
+      configurable: true,
+    });
+    try {
+      const result = loadExpansions();
+      expect(result).toEqual(["base"]);
+    } finally {
+      if (original) {
+        Object.defineProperty(window, "localStorage", original);
+      }
+    }
+  });
+
+  it("when saveExpansions is called, then it silently ignores the error", () => {
+    const original = Object.getOwnPropertyDescriptor(window, "localStorage");
+    Object.defineProperty(window, "localStorage", {
+      get() {
+        throw new DOMException("SecurityError");
+      },
+      configurable: true,
+    });
+    try {
+      expect(() => saveExpansions(["base", "chaos"])).not.toThrow();
+    } finally {
+      if (original) {
+        Object.defineProperty(window, "localStorage", original);
+      }
+    }
+  });
+});
+
 // Feature: santorini-power-randomizer, Property 5: Expansion persistence round-trip
 describe("Given any array of ExpansionId values", () => {
   it("when saveExpansions then loadExpansions is called, then the same elements are returned (order-independent)", () => {

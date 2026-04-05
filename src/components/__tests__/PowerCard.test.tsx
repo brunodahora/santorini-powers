@@ -114,3 +114,30 @@ describe("Given a PowerCard on its back face", () => {
     ).toBeInTheDocument();
   });
 });
+
+describe("Given a PowerCard focused via keyboard", () => {
+  it("when the user presses Enter, then the card flips to show the back face", async () => {
+    const user = userEvent.setup();
+    render(<PowerCard power={mockPower} />);
+
+    const card = screen.getByRole("button");
+    card.focus();
+    await user.keyboard("{Enter}");
+
+    expect(screen.getByText("Apollo")).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: /full strategy/i }),
+    ).toBeInTheDocument();
+  });
+
+  it("when the user presses Space, then the card flips to show the back face", async () => {
+    const user = userEvent.setup();
+    render(<PowerCard power={mockPower} />);
+
+    const card = screen.getByRole("button");
+    card.focus();
+    await user.keyboard(" ");
+
+    expect(screen.getByText("Apollo")).toBeInTheDocument();
+  });
+});

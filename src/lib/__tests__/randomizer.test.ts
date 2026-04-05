@@ -23,6 +23,24 @@ describe("Given a pool of base expansion powers", () => {
   });
 });
 
+describe("Given includeSpecialConditions is false", () => {
+  it("when pickOne is called, then it never returns a power with specialConditions", () => {
+    for (let i = 0; i < 20; i++) {
+      const result = pickOne(POWERS, EXPANSION_IDS, false, true);
+      expect(result.specialConditions).toBe(false);
+    }
+  });
+});
+
+describe("Given includeDice is false", () => {
+  it("when pickOne is called, then it never returns a power that requires dice", () => {
+    for (let i = 0; i < 20; i++) {
+      const result = pickOne(POWERS, EXPANSION_IDS, true, false);
+      expect(result.dice).toBe(false);
+    }
+  });
+});
+
 // Feature: santorini-power-randomizer, Property 1: Single pick always returns a power from active expansions
 describe("Given any non-empty set of active expansions", () => {
   it("when pickOne is called, then it always returns a power whose expansion is in the active set", () => {
@@ -45,6 +63,22 @@ describe("Given a pool with at least two powers", () => {
   it("when pickTwo is called, then it returns two distinct powers", () => {
     const [a, b] = pickTwo(POWERS, ["base"]);
     expect(a.id).not.toBe(b.id);
+  });
+});
+
+describe("Given includeDice is false", () => {
+  it("when pickTwo is called, then neither returned power requires dice", () => {
+    const [a, b] = pickTwo(POWERS, EXPANSION_IDS, true, false);
+    expect(a.dice).toBe(false);
+    expect(b.dice).toBe(false);
+  });
+});
+
+describe("Given includeSpecialConditions is false", () => {
+  it("when pickTwo is called, then neither returned power has specialConditions", () => {
+    const [a, b] = pickTwo(POWERS, EXPANSION_IDS, false, true);
+    expect(a.specialConditions).toBe(false);
+    expect(b.specialConditions).toBe(false);
   });
 });
 
@@ -79,6 +113,31 @@ describe("Given the base expansion is active (which has valid matchups)", () => 
   it("when pickMatchup is called, then it returns a non-null pair", () => {
     const result = pickMatchup(POWERS, MATCHUPS, ["base"]);
     expect(result).not.toBeNull();
+  });
+
+  it("when pickMatchup is called, then both returned powers are from the base expansion", () => {
+    // All base-only matchups use base powers — spot-check a few runs
+    for (let i = 0; i < 10; i++) {
+      const result = pickMatchup(POWERS, MATCHUPS, ["base"]);
+      expect(result).not.toBeNull();
+      const [p1, p2] = result!;
+      expect(p1.expansion).toBe("base");
+      expect(p2.expansion).toBe("base");
+    }
+  });
+});
+
+describe("Given includeSpecialConditions is false and a matchup contains a specialConditions power", () => {
+  it("when pickMatchup is called, then it does not return that matchup", () => {
+    // charybdis has specialConditions: true — any matchup containing it should be excluded
+    for (let i = 0; i < 20; i++) {
+      const result = pickMatchup(POWERS, MATCHUPS, EXPANSION_IDS, false, true);
+      if (result !== null) {
+        const [p1, p2] = result;
+        expect(p1.specialConditions).toBe(false);
+        expect(p2.specialConditions).toBe(false);
+      }
+    }
   });
 });
 

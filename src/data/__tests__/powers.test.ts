@@ -1,7 +1,31 @@
 import * as fc from "fast-check";
-import { describe, it } from "vitest";
+import { describe, it, expect } from "vitest";
 
 import { POWERS, GAME_MODES, MATCHUPS } from "../powers";
+
+// ── Static integrity ──────────────────────────────────────────────────────────
+
+describe("Given all powers in POWERS", () => {
+  it("when checking for duplicate IDs, then every power ID is unique", () => {
+    const ids = POWERS.map((p) => p.id);
+    const unique = new Set(ids);
+    expect(unique.size).toBe(ids.length);
+  });
+
+  it("when checking column values, then every god power has col >= 1 (col 0 is reserved for game modes)", () => {
+    POWERS.forEach((p) => {
+      expect(p.col).toBeGreaterThanOrEqual(1);
+    });
+  });
+});
+
+describe("Given all game modes in GAME_MODES", () => {
+  it("when checking for duplicate IDs, then every game mode ID is unique", () => {
+    const ids = GAME_MODES.map((m) => m.id);
+    const unique = new Set(ids);
+    expect(unique.size).toBe(ids.length);
+  });
+});
 
 // Feature: santorini-power-randomizer, Property 7: Game mode sprites always use column 0
 describe("Given all game modes in GAME_MODES", () => {
