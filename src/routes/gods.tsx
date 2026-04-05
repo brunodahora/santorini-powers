@@ -113,19 +113,10 @@ export function GodsListScreen() {
                 />
                 <span className="text-xs text-white text-center leading-tight">
                   {power.name}
-                  {(power.specialConditions || power.dice) && (
-                    <span
-                      aria-label={[
-                        power.specialConditions && "has special conditions",
-                        power.dice && "uses dice",
-                      ]
-                        .filter(Boolean)
-                        .join(", ")}
-                    >
-                      {" "}
-                      *
-                    </span>
+                  {power.specialConditions && (
+                    <span aria-label="has special conditions"> *</span>
                   )}
+                  {power.dice && <span aria-label="uses dice"> (d)</span>}
                 </span>
               </Link>
             </li>
