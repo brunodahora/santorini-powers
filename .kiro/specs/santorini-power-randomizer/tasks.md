@@ -6,7 +6,7 @@ Incremental build-up from tooling setup → core logic → shared components →
 
 ## Tasks
 
-- [-] 1. Install dependencies and configure tooling
+- [x] 1. Install dependencies and configure tooling
   - Install TanStack Router: `npm install @tanstack/react-router`
   - Install Shadcn/ui prerequisites (Tailwind CSS v4, tw-animate-css): `npm install tailwindcss @tailwindcss/vite tw-animate-css`
   - Initialize Shadcn: `npx shadcn@latest init` (choose default style, CSS variables)
@@ -17,45 +17,45 @@ Incremental build-up from tooling setup → core logic → shared components →
   - Create `src/test/setup.ts` importing `@testing-library/jest-dom`
   - _Requirements: 9.3_
 
-- [ ] 2. Implement core library modules
-  - [ ] 2.1 Implement `src/lib/sprite.ts` — `getSpriteStyle(expansion, row, col, sizePx): SpriteStyle`
+- [x] 2. Implement core library modules
+  - [x] 2.1 Implement `src/lib/sprite.ts` — `getSpriteStyle(expansion, row, col, sizePx): SpriteStyle`
     - Use `SPRITE_GRID[expansion]` for `backgroundSize`; compute `backgroundPosition` as `-(col*size)px -(row*size)px`
     - _Requirements: 11.1, 11.2, 11.4_
 
-  - [ ]* 2.2 Write property test for sprite style cell calculation (Property 6)
+  - [x] 2.2 Write property test for sprite style cell calculation (Property 6)
     - **Property 6: Sprite style covers the correct cell**
     - **Validates: Requirements 11.1, 11.2, 11.4**
     - File: `src/lib/sprite.test.ts`
 
-  - [ ] 2.3 Implement `src/lib/storage.ts` — `loadExpansions()` and `saveExpansions(ids)`
+  - [x] 2.3 Implement `src/lib/storage.ts` — `loadExpansions()` and `saveExpansions(ids)`
     - Default to `["base"]` when key absent; catch `SecurityError` for private-browsing fallback
     - _Requirements: 1.7, 2.6_
 
-  - [ ]* 2.4 Write property test for expansion persistence round-trip (Property 5)
+  - [x] 2.4 Write property test for expansion persistence round-trip (Property 5)
     - **Property 5: Expansion persistence round-trip**
     - **Validates: Requirements 1.7, 2.6**
     - File: `src/lib/storage.test.ts`
 
-  - [ ] 2.5 Implement `src/lib/randomizer.ts` — `pickOne`, `pickTwo`, `pickMatchup`
+  - [x] 2.5 Implement `src/lib/randomizer.ts` — `pickOne`, `pickTwo`, `pickMatchup`
     - `pickMatchup` returns `null` when no valid matchups exist for active expansions
     - _Requirements: 3.1, 4.1, 5.1, 5.3_
 
-  - [ ]* 2.6 Write property test for pickOne expansion membership (Property 1)
+  - [x] 2.6 Write property test for pickOne expansion membership (Property 1)
     - **Property 1: Single pick always returns a power from active expansions**
     - **Validates: Requirements 3.1**
     - File: `src/lib/randomizer.test.ts`
 
-  - [ ]* 2.7 Write property test for pickTwo distinct + expansion (Property 2)
+  - [x] 2.7 Write property test for pickTwo distinct + expansion (Property 2)
     - **Property 2: Two-power pick returns distinct powers from active expansions**
     - **Validates: Requirements 4.1**
     - File: `src/lib/randomizer.test.ts`
 
-  - [ ]* 2.8 Write property test for pickMatchup valid pair (Property 3)
+  - [x] 2.8 Write property test for pickMatchup valid pair (Property 3)
     - **Property 3: Matchup pick returns a valid curated pair from active expansions**
     - **Validates: Requirements 5.1**
     - File: `src/lib/randomizer.test.ts`
 
-  - [ ]* 2.9 Write property test for pickMatchup null when no matchups (Property 4)
+  - [x] 2.9 Write property test for pickMatchup null when no matchups (Property 4)
     - **Property 4: No valid matchups returns null**
     - **Validates: Requirements 5.3**
     - File: `src/lib/randomizer.test.ts`
@@ -74,7 +74,7 @@ Incremental build-up from tooling setup → core logic → shared components →
     - Props: `expansion`, `row`, `col`, `size?`, `alt`, `className?`
     - _Requirements: 6.1, 6.2, 6.3, 11.1, 11.2_
 
-  - [ ]* 5.2 Write unit test for SpriteImage fallback rendering
+  - [ ] 5.2 Write unit test for SpriteImage fallback rendering
     - Test that when background image fails, the power name text is shown
     - _Requirements: 6.3_
 
@@ -85,11 +85,11 @@ Incremental build-up from tooling setup → core logic → shared components →
     - Props: `power: Power`, `initiallyFlipped?: boolean`
     - _Requirements: 6.1, 6.2, 6.4, 6.5, 6.6, 6.7_
 
-  - [ ]* 5.4 Write unit test for PowerCard front/back rendering
+  - [ ] 5.4 Write unit test for PowerCard front/back rendering
     - Test front face shows sprite, back face shows name and BGA link after click
     - _Requirements: 6.4, 6.5_
 
-  - [ ]* 5.5 Write property test for BGA link slug (Property 9)
+  - [ ] 5.5 Write property test for BGA link slug (Property 9)
     - **Property 9: BGA link contains the correct slug**
     - **Validates: Requirements 6.5**
     - File: `src/data/powers.test.ts`
@@ -120,12 +120,12 @@ Incremental build-up from tooling setup → core logic → shared components →
     - _Requirements: 1.1_
 
 - [ ] 7. Implement static data correctness tests
-  - [ ]* 7.1 Write property test for game mode col === 0 (Property 7)
+  - [ ] 7.1 Write property test for game mode col === 0 (Property 7)
     - **Property 7: Game mode sprites always use column 0**
     - **Validates: Requirements 11.3**
     - File: `src/data/powers.test.ts`
 
-  - [ ]* 7.2 Write property test for matchup IDs exist in POWERS (Property 8)
+  - [ ] 7.2 Write property test for matchup IDs exist in POWERS (Property 8)
     - **Property 8: All matchup power IDs exist in POWERS**
     - **Validates: Requirements 10.3**
     - File: `src/data/powers.test.ts`
