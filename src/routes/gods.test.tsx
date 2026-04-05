@@ -45,7 +45,18 @@ function renderGods(activeExpansions = ["base"]) {
     component: () => <div>Selection Screen</div>,
   });
 
-  const routeTree = rootRoute.addChildren([godsRoute, resultRoute, homeRoute]);
+  const othersRoute = createRoute({
+    getParentRoute: () => rootRoute,
+    path: "/others",
+    component: () => <div>Others Screen</div>,
+  });
+
+  const routeTree = rootRoute.addChildren([
+    godsRoute,
+    resultRoute,
+    homeRoute,
+    othersRoute,
+  ]);
   const history = createMemoryHistory({ initialEntries: ["/gods"] });
   const router = createRouter({ routeTree, history });
 
@@ -75,19 +86,24 @@ describe("Given the gods list screen with base expansion active", () => {
     expect(screen.queryByRole("link", { name: chaosGod.name })).toBeNull();
   });
 
-  it("when rendered, then a Back link to / is shown", async () => {
+  it("when rendered, then a Back link to /others is shown", async () => {
     renderGods(["base"]);
 
-    const backLink = await screen.findByRole("link", { name: /back/i });
-    expect(backLink).toHaveAttribute("href", "/");
+    const backLink = await screen.findByRole("link", {
+      name: /back/i,
+      hidden: true,
+    });
+    expect(backLink).toHaveAttribute("href", "/others");
   });
 
-  it("when the user clicks Back, then they navigate to the selection screen", async () => {
+  it("when the user clicks Back, then they navigate to the others screen", async () => {
     const user = userEvent.setup();
     renderGods(["base"]);
 
-    await user.click(await screen.findByRole("link", { name: /back/i }));
-    expect(await screen.findByText("Selection Screen")).toBeInTheDocument();
+    await user.click(
+      await screen.findByRole("link", { name: /back/i, hidden: true }),
+    );
+    expect(await screen.findByText(/others screen/i)).toBeInTheDocument();
   });
 
   it("when the user clicks a god, then they navigate to the result screen", async () => {
