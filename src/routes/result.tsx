@@ -10,6 +10,7 @@ import {
   type CarouselApi,
 } from "../components/ui/carousel";
 import { MATCHUPS, POWERS, type Power } from "../data/powers";
+import { useBackButton } from "../hooks/useBackButton";
 import { useExpansions } from "../hooks/useExpansions";
 import { pickMatchup, pickOne, pickTwo } from "../lib/randomizer";
 
@@ -43,6 +44,8 @@ export function ResultScreen() {
     : [];
   const powers = idList.map((id) => POWERS.find((p) => p.id === id));
   const allFound = powers.length > 0 && powers.every(Boolean);
+
+  useBackButton(() => navigate({ to: "/" }));
 
   useEffect(() => {
     const validModes = ["one", "two", "matchup"];
@@ -155,7 +158,7 @@ export function ResultScreen() {
         <Button
           variant="back"
           size="lg"
-          className="min-h-[44px]"
+          className="md:hidden min-h-[44px] hidden"
           onClick={() => navigate({ to: "/" })}
         >
           ← Back

@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "@tanstack/react-router";
 import { CARD_WIDTH, CARD_HEIGHT } from "../components/PowerCard";
 import { Button } from "../components/ui/button";
 import { GAME_MODES, type GameMode } from "../data/powers";
+import { useBackButton } from "../hooks/useBackButton";
 import { getSpriteStyle } from "../lib/sprite";
 
 function ScaledModeCard({ mode }: { mode: GameMode }) {
@@ -42,6 +43,8 @@ export function GameModeDetailScreen() {
 
   const mode = GAME_MODES.find((m) => m.id === id);
 
+  useBackButton(() => navigate({ to: "/game-modes" }));
+
   if (!mode) {
     navigate({ to: "/game-modes" });
     return null;
@@ -56,7 +59,7 @@ export function GameModeDetailScreen() {
       <Button
         variant="back"
         size="lg"
-        className="min-h-[44px] mt-2"
+        className="min-h-[44px] mt-2 md:flex hidden"
         onClick={() => navigate({ to: "/game-modes" })}
       >
         ← Back

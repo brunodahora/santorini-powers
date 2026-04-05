@@ -1,14 +1,17 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 
 import { SpriteImage } from "../components/SpriteImage";
 import { EXPANSIONS, POWERS } from "../data/powers";
 import type { ExpansionId } from "../data/powers";
+import { useBackButton } from "../hooks/useBackButton";
 import { useExpansions } from "../hooks/useExpansions";
 
 export function GodsListScreen() {
+  const navigate = useNavigate();
   const [activeExpansions] = useExpansions();
   const [filter, setFilter] = useState<ExpansionId | "all">("all");
+  useBackButton(() => navigate({ to: "/others" }));
 
   const availableExpansions = EXPANSIONS.filter((e) =>
     activeExpansions.includes(e.id),
@@ -93,7 +96,7 @@ export function GodsListScreen() {
 
       <Link
         to="/others"
-        className="min-h-[44px] px-4 inline-flex items-center justify-center text-sm font-medium text-white/70 hover:text-white underline-offset-4 hover:underline"
+        className="min-h-[44px] px-4 md:inline-flex hidden items-center justify-center text-sm font-medium text-white/70 hover:text-white underline-offset-4 hover:underline"
       >
         ← Back
       </Link>

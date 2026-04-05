@@ -3,12 +3,16 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { Button } from "../components/ui/button";
 import { Checkbox } from "../components/ui/checkbox";
 import { EXPANSIONS } from "../data/powers";
+import { useBackButton } from "../hooks/useBackButton";
 import { useExpansions } from "../hooks/useExpansions";
 
 export function SettingsScreen() {
   const navigate = useNavigate();
   const [activeExpansions, toggleExpansion] = useExpansions();
   const noneSelected = activeExpansions.length === 0;
+  useBackButton(() => {
+    if (!noneSelected) navigate({ to: "/others" });
+  });
 
   return (
     <div className="flex flex-col items-center gap-6 px-4 py-8 max-w-lg mx-auto w-full flex-1">
@@ -60,7 +64,7 @@ export function SettingsScreen() {
       <Button
         variant="back"
         size="lg"
-        className="min-h-[44px] mt-2"
+        className="min-h-[44px] mt-2 md:flex hidden"
         disabled={noneSelected}
         onClick={() => navigate({ to: "/others" })}
       >

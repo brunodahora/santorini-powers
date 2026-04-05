@@ -3,11 +3,13 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { SpriteImage } from "../components/SpriteImage";
 import { Button } from "../components/ui/button";
 import { GAME_MODES, EXPANSIONS } from "../data/powers";
+import { useBackButton } from "../hooks/useBackButton";
 import { useExpansions } from "../hooks/useExpansions";
 
 export function GameModesScreen() {
   const navigate = useNavigate();
   const [activeExpansions] = useExpansions();
+  useBackButton(() => navigate({ to: "/others" }));
 
   const visibleModes = GAME_MODES.filter((m) =>
     activeExpansions.includes(m.expansion),
@@ -59,7 +61,7 @@ export function GameModesScreen() {
       <Button
         variant="back"
         size="lg"
-        className="min-h-[44px] mt-2"
+        className="min-h-[44px] mt-2 md:flex hidden"
         onClick={() => navigate({ to: "/others" })}
       >
         ← Back

@@ -1,11 +1,14 @@
-import { Link, useParams } from "@tanstack/react-router";
+import { Link, useNavigate, useParams } from "@tanstack/react-router";
 
 import { POWERS } from "../data/powers";
 import type { ExpansionId } from "../data/powers";
+import { useBackButton } from "../hooks/useBackButton";
 
 export function ExpansionGodListScreen() {
   const { id } = useParams({ from: "/expansion/$id" });
+  const navigate = useNavigate();
   const gods = POWERS.filter((p) => p.expansion === (id as ExpansionId));
+  useBackButton(() => navigate({ to: "/settings" }));
 
   return (
     <div className="flex flex-col items-center gap-6 px-4 py-8 max-w-lg mx-auto w-full flex-1">
@@ -29,7 +32,7 @@ export function ExpansionGodListScreen() {
 
       <Link
         to="/settings"
-        className="min-h-[44px] px-4 inline-flex items-center justify-center text-sm font-medium text-white/70 hover:text-white underline-offset-4 hover:underline"
+        className="min-h-[44px] px-4 md:inline-flex hidden items-center justify-center text-sm font-medium text-white/70 hover:text-white underline-offset-4 hover:underline"
       >
         ← Back
       </Link>

@@ -98,20 +98,20 @@ body {
 }
 
 body {
-  /* Aegean sea gradient — slightly lighter blue */
-  background-color: #0f2a4a;
+  /* Aegean sea gradient — medium blue */
+  background-color: #1a4a7a;
   background-image:
     radial-gradient(
       ellipse at 20% 50%,
-      rgba(20, 50, 90, 0.8) 0%,
+      rgba(20, 60, 110, 0.8) 0%,
       transparent 60%
     ),
     radial-gradient(
       ellipse at 80% 20%,
-      rgba(30, 70, 130, 0.4) 0%,
+      rgba(40, 90, 160, 0.4) 0%,
       transparent 50%
     ),
-    linear-gradient(180deg, #112238 0%, #0f2a4a 40%, #0d2440 70%, #0b1e38 100%);
+    linear-gradient(180deg, #1e5080 0%, #1a4a7a 40%, #163f6a 70%, #12345a 100%);
   background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
