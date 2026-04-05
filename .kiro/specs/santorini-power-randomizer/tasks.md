@@ -119,18 +119,18 @@ Incremental build-up from tooling setup → core logic → shared components →
   - [x] 6.4 Update `src/main.tsx` to mount `RouterProvider` with the router instance
     - _Requirements: 1.1_
 
-- [ ] 7. Implement static data correctness tests
-  - [ ] 7.1 Write property test for game mode col === 0 (Property 7)
+- [x] 7. Implement static data correctness tests
+  - [x] 7.1 Write property test for game mode col === 0 (Property 7)
     - **Property 7: Game mode sprites always use column 0**
     - **Validates: Requirements 11.3**
     - File: `src/data/powers.test.ts`
 
-  - [ ] 7.2 Write property test for matchup IDs exist in POWERS (Property 8)
+  - [x] 7.2 Write property test for matchup IDs exist in POWERS (Property 8)
     - **Property 8: All matchup power IDs exist in POWERS**
     - **Validates: Requirements 10.3**
     - File: `src/data/powers.test.ts`
 
-- [ ] 8. Implement Selection Screen (`src/routes/index.tsx`)
+- [x] 8. Implement Selection Screen (`src/routes/index.tsx`)
   - Four Shadcn `Button` components: "Pick One Power", "Pick Two Powers", "Random Matchup", "Others"
   - Box art (`/img/box.webp`) visible on desktop only (`hidden md:block`), hidden on mobile
   - "Pick One Power" → calls `pickOne`, navigates to `/result?mode=one&ids={id}`
@@ -139,7 +139,7 @@ Incremental build-up from tooling setup → core logic → shared components →
   - "Others" → navigates to `/others`
   - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 3.1, 3.2, 4.1, 4.2, 5.1, 5.2, 5.3_
 
-- [ ] 9. Implement Result Screen (`src/routes/result.tsx`)
+- [x] 9. Implement Result Screen (`src/routes/result.tsx`)
   - Read `mode` and `ids` from URL search params; redirect to `/` if invalid or power IDs not found
   - Render 1 or 2 `PowerCard` components
   - Desktop 2-card layout: side-by-side flex
@@ -148,7 +148,7 @@ Incremental build-up from tooling setup → core logic → shared components →
   - "Back" button: navigates to `/`
   - _Requirements: 3.2, 4.2, 4.3, 4.4, 7.1, 7.2, 7.3, 7.4, 8.3, 8.4_
 
-- [ ] 10. Checkpoint — Ensure all tests pass
+- [x] 10. Checkpoint — Ensure all tests pass
   - Run `npx vitest --run` and confirm all tests pass. Ask the user if questions arise.
 
 - [ ] 11. Implement Settings Screen (`src/routes/settings.tsx`)

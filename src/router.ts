@@ -5,7 +5,9 @@ import {
 } from "@tanstack/react-router";
 
 import { RootLayout } from "./routes/__root";
+import { SelectionScreen } from "./routes/index";
 import { OthersScreen } from "./routes/others";
+import { ResultScreen } from "./routes/result";
 
 // Lazy placeholder components for routes not yet implemented
 function NotYetImplemented() {
@@ -17,7 +19,7 @@ const rootRoute = createRootRoute({ component: RootLayout });
 const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/",
-  component: NotYetImplemented,
+  component: SelectionScreen,
 });
 
 const othersRoute = createRoute({
@@ -29,7 +31,11 @@ const othersRoute = createRoute({
 const resultRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/result",
-  component: NotYetImplemented,
+  component: ResultScreen,
+  validateSearch: (search: Record<string, unknown>) => ({
+    mode: (search.mode as "one" | "two" | "matchup") ?? "one",
+    ids: (search.ids as string) ?? "",
+  }),
 });
 
 const settingsRoute = createRoute({
