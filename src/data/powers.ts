@@ -141,7 +141,7 @@ export const POWERS: Power[] = [
     col: 1,
     bgaSlug: "Aphrodite",
     description:
-      "Your Workers move into unoccupied spaces; if a Worker moves next to an opponent's Worker, that opponent's Worker is pushed to the space directly behind it.",
+      "Opponent's Turn: Each opponent worker which neighbors one of your workers at the start of their turn must also neighbor one of your workers at the end of their turn.",
   },
   {
     id: "apollo",
@@ -151,7 +151,7 @@ export const POWERS: Power[] = [
     col: 2,
     bgaSlug: "Apollo",
     description:
-      "Your Worker may move into an opponent Worker's space by forcing their Worker to the space yours just vacated.",
+      "Your Move: Your worker may move into an opponent worker's space on the same or lower level by forcing their worker to your original space.",
   },
   {
     id: "artemis",
@@ -161,7 +161,7 @@ export const POWERS: Power[] = [
     col: 3,
     bgaSlug: "Artemis",
     description:
-      "Your Worker may move one additional time, but not back to its initial space.",
+      "Your Move: Your worker may move one additional time, but not back to its starting space.",
   },
   {
     id: "asteria",
@@ -171,7 +171,7 @@ export const POWERS: Power[] = [
     col: 4,
     bgaSlug: "Asteria",
     description:
-      "If your Worker does not move up, it may build both before and after moving.",
+      "End of Your Turn: If one of your workers moved down a level this turn, you may build a dome in any unoccupied space (regardless of its level).",
   },
   {
     id: "atalanta",
@@ -181,7 +181,7 @@ export const POWERS: Power[] = [
     col: 5,
     bgaSlug: "Atalanta",
     description:
-      "Your Workers can move any number of times, but each space can only be entered once per turn.",
+      "Your Move (Once Per Game): Your worker moves any number of additional times.",
   },
   {
     id: "athena",
@@ -191,7 +191,7 @@ export const POWERS: Power[] = [
     col: 6,
     bgaSlug: "Athena",
     description:
-      "During opponent's turns: If one of your Workers moved up on your last turn, opponent Workers cannot move up this turn.",
+      "Opponent's Turn: If one of your workers moved up a level on your last turn, opponent workers cannot move up a level this turn.",
   },
   {
     id: "atlas",
@@ -200,7 +200,7 @@ export const POWERS: Power[] = [
     row: 0,
     col: 7,
     bgaSlug: "Atlas",
-    description: "Your Worker may build a dome at any level.",
+    description: "Your Build: Your worker may build a dome at any level.",
   },
   {
     id: "aurae",
@@ -210,7 +210,7 @@ export const POWERS: Power[] = [
     col: 8,
     bgaSlug: null, // No BGA guide page
     description:
-      "Once per turn, when a Worker is forced to move, you may move one of your Workers to any unoccupied space.",
+      "Setup: After placing your workers, roll the die. End of Your Turn: Each of your workers may move any number of times in the direction shown by the die. You cannot win with these extra moves. Then you may roll the die.",
   },
   {
     id: "bellerophon",
@@ -219,7 +219,8 @@ export const POWERS: Power[] = [
     row: 1,
     col: 1,
     bgaSlug: "Bellerophon",
-    description: "Your Workers can move up two levels instead of one.",
+    description:
+      "Your Move (Once Per Game): Your worker may move up two levels.",
   },
   {
     id: "bia",
@@ -229,7 +230,7 @@ export const POWERS: Power[] = [
     col: 2,
     bgaSlug: "Bia",
     description:
-      "If your Worker moves into a space occupied by an opponent's Worker, remove that Worker from the game.",
+      "Setup: Players place their workers in clockwise order starting with you. After you Move: If the next neighboring space in the same direction as your move has an opponent's worker (at any level), that worker is removed from the game.",
   },
   {
     id: "castor-pollux",
@@ -239,7 +240,7 @@ export const POWERS: Power[] = [
     col: 3,
     bgaSlug: "Castor",
     description:
-      "You control three Workers. Each turn, move and build with any two of them.",
+      "Alternative Turn (optional): You may either move all of your workers and not build with any of them, or move none of your workers and build with all of them.",
   },
   {
     id: "demeter",
@@ -249,7 +250,7 @@ export const POWERS: Power[] = [
     col: 4,
     bgaSlug: "Demeter",
     description:
-      "Your Worker may build one additional time, but not on the same space.",
+      "Your Build: Your worker may build one additional time, but not on the same space.",
   },
   {
     id: "dionysus",
@@ -259,7 +260,7 @@ export const POWERS: Power[] = [
     col: 5,
     bgaSlug: "Dionysus",
     description:
-      "Each time an opponent's Worker moves, you may move one of your Workers.",
+      "Your Build: Each time a worker you control creates a complete tower, you may take an additional turn using an opponent's worker instead of your own. No player can win during these additional turns.",
   },
   {
     id: "dryads",
@@ -269,7 +270,7 @@ export const POWERS: Power[] = [
     col: 6,
     bgaSlug: null, // No BGA guide page
     description:
-      "Once per turn, your Worker may move to any unoccupied space at the same level.",
+      "Start of Your Turn: You must roll the die. End of Your Turn: You may force one of your workers to an unoccupied neighboring space at any level in the direction shown by the die.",
   },
   {
     id: "eris",
@@ -279,7 +280,7 @@ export const POWERS: Power[] = [
     col: 7,
     bgaSlug: "Eris",
     description:
-      "Once per turn, when you build, you may also build on any space occupied by an opponent's Worker, sending it back to ground level.",
+      "Alternative Turn (optional): You may move and build (and even win!) with an opponent's worker as if it was your own, as long as it is not the worker that they most recently moved.",
   },
   {
     id: "eros",
@@ -289,7 +290,7 @@ export const POWERS: Power[] = [
     col: 8,
     bgaSlug: "Eros",
     description:
-      "You also win if both your Workers move to spaces that are adjacent to each other and both on level 1.",
+      "Setup: Place your workers anywhere along opposite edges of the board. Alternative Win Condition: You also win if at the end of your turn, all of your workers are on level-1 blocks that neighbor each other.",
   },
   {
     id: "hera",
@@ -298,7 +299,8 @@ export const POWERS: Power[] = [
     row: 2,
     col: 1,
     bgaSlug: "Hera",
-    description: "Opponent Workers cannot win by moving to a perimeter space.",
+    description:
+      "Opponent's Turn: An opponent cannot win by moving into a perimeter space.",
   },
   {
     id: "iris",
@@ -308,7 +310,7 @@ export const POWERS: Power[] = [
     col: 2,
     bgaSlug: "Iris",
     description:
-      "Your Worker may move any number of spaces in one direction, but not over or onto occupied spaces.",
+      "Your Move: If there is a worker neighboring your worker and the space on the opposite side of it is unoccupied, your worker may move to that space, regardless of its level.",
   },
   {
     id: "limus",
@@ -318,7 +320,7 @@ export const POWERS: Power[] = [
     col: 3,
     bgaSlug: "Limus",
     description:
-      "Opponent Workers cannot build on spaces neighboring your Workers, unless building a dome to create a Complete Tower.",
+      "Opponent's Turn: Opponent workers cannot build on spaces neighboring your workers, unless building a dome.",
   },
   {
     id: "medusa",
@@ -328,7 +330,7 @@ export const POWERS: Power[] = [
     col: 4,
     bgaSlug: "Medusa",
     description:
-      "At the end of your turn, if any of your Workers are on a lower level than a neighboring opponent Worker, replace the opponent Worker with a block.",
+      "End of Your Turn: For each opponent, you may choose one of their workers who neighbors any of your workers and is at a lower level. The chosen workers are removed from the game and replaced with domes.",
   },
   {
     id: "metis",
@@ -338,7 +340,7 @@ export const POWERS: Power[] = [
     col: 5,
     bgaSlug: null, // No BGA guide page
     description:
-      "Once per turn, after an opponent moves, you may move one of your Workers.",
+      "Start of Your Turn: You must roll the die. End of Your Turn: You may select an unoccupied space that neighbors one of your workers. If the number on the die matches the number of blocks in that space, build a dome there.",
   },
   {
     id: "minotaur",
@@ -348,7 +350,7 @@ export const POWERS: Power[] = [
     col: 6,
     bgaSlug: "Minotaur",
     description:
-      "Your Worker may move into an opponent Worker's space, if their Worker can be forced one space straight backwards to an unoccupied space at any level.",
+      "Your Move: Your worker may move onto an opponent worker's space by forcing them one space in the same direction you moved, to an unoccupied space at any level.",
   },
   {
     id: "oceanids",
@@ -358,7 +360,7 @@ export const POWERS: Power[] = [
     col: 7,
     bgaSlug: null, // No BGA guide page
     description:
-      "Your Workers may build on spaces occupied by opponent Workers, sending them back to ground level.",
+      "Setup: After placing your workers, roll the die. Start of Your Turn: Add 1 to the number shown on the die for each of your workers on the perimeter. If the result is 3 or more you must take a single bonus turn after this one. You cannot win on the bonus turn. End of Your Turn (not your bonus turn): You must roll the die.",
   },
   {
     id: "oceanus",
@@ -368,7 +370,7 @@ export const POWERS: Power[] = [
     col: 8,
     bgaSlug: null, // No BGA guide page
     description:
-      "Once per turn, your Worker may move to any unoccupied perimeter space.",
+      "Your Turn: You must complete a move and build with each of your workers. Win Restriction: You cannot win normally. To win, two of your workers must move up to the third level during the same turn.",
   },
   {
     id: "oreads",
@@ -378,7 +380,7 @@ export const POWERS: Power[] = [
     col: 1,
     bgaSlug: null, // No BGA guide page
     description:
-      "At the start of the game, place one mountain (3 blocks and a dome) anywhere on the board.",
+      "Setup: After placing your workers, roll the die. End of Your Turn: You may build in the direction shown by the die with any number of your workers. Then you may roll the die.",
   },
   {
     id: "pan",
@@ -387,7 +389,8 @@ export const POWERS: Power[] = [
     row: 3,
     col: 2,
     bgaSlug: "Pan",
-    description: "You also win if your Worker moves down two or more levels.",
+    description:
+      "Alternative Win Condition: You can also win by moving your worker down two or more levels.",
   },
   {
     id: "pegasus",
@@ -397,7 +400,7 @@ export const POWERS: Power[] = [
     col: 3,
     bgaSlug: "Pegasus",
     description:
-      "Your Workers are not blocked by domes when moving; they may fly over domes to land on the other side.",
+      "Your Move: Your worker may move up more than one level, but cannot win by doing so.",
   },
   {
     id: "perseus",
@@ -407,7 +410,7 @@ export const POWERS: Power[] = [
     col: 4,
     bgaSlug: null, // No BGA guide page
     description:
-      "Once per turn, your Worker may build before moving instead of after.",
+      "End of Your Turn (Once Per Game): Move one of your workers one, two or three consecutive times into spaces occupied by other workers, and then make a move to an unoccupied space.",
   },
   {
     id: "polyphemus",
@@ -417,7 +420,7 @@ export const POWERS: Power[] = [
     col: 5,
     bgaSlug: "Polyphemus",
     description:
-      "Your Workers can move up any number of levels instead of just one.",
+      "End of Your Turn (Once Per Game): Build up to 2 domes at any level on any unoccupied spaces anywhere on the board.",
   },
   {
     id: "scylla",
@@ -427,7 +430,7 @@ export const POWERS: Power[] = [
     col: 6,
     bgaSlug: "Scylla",
     description:
-      "Once per turn, after building, you may remove any block (not dome) from the board.",
+      "After Your Move: You may choose one opponent worker who neighbors the space you moved out of. They are forced into it (regardless of its height).",
   },
   {
     id: "triton",
@@ -437,7 +440,7 @@ export const POWERS: Power[] = [
     col: 7,
     bgaSlug: "Triton",
     description:
-      "Each time your Worker moves to a perimeter space, it may immediately move again.",
+      "Your Move: Each time your worker moves into a perimeter space, the worker may immediately move again.",
   },
   {
     id: "zeus",
@@ -446,7 +449,8 @@ export const POWERS: Power[] = [
     row: 3,
     col: 8,
     bgaSlug: "Zeus",
-    description: "Your Worker may build under itself, moving up one level.",
+    description:
+      "Your Build: You may choose not to build normally, and instead build a block underneath your moved worker.",
   },
 
   // ── CHAOS ────────────────────────────────────────────────────────────────
@@ -458,7 +462,7 @@ export const POWERS: Power[] = [
     col: 1,
     bgaSlug: "Adonis",
     description:
-      "At the start of your turn, you may move one block from any space to an unoccupied space.",
+      "End of Your Turn (Once Per Game): Move an opponent worker who neighbors your moved worker.",
   },
   {
     id: "antaeus",
@@ -467,7 +471,8 @@ export const POWERS: Power[] = [
     row: 0,
     col: 2,
     bgaSlug: null, // No BGA guide page
-    description: "Your Workers cannot be moved by opponent powers.",
+    description:
+      "End of Your Turn: If your unmoved worker is on the ground level, you may take a single bonus turn selecting that worker.",
   },
   {
     id: "asklepios",
@@ -477,7 +482,7 @@ export const POWERS: Power[] = [
     col: 3,
     bgaSlug: null, // No BGA guide page
     description:
-      "Once per turn, after building, you may place a token on the built space. Spaces with tokens cannot be built upon.",
+      "Your Build: You may choose not to build normally, and instead build a block (not dome) under a neighbouring worker.",
   },
   {
     id: "graeae",
@@ -487,7 +492,7 @@ export const POWERS: Power[] = [
     col: 4,
     bgaSlug: "Graeae",
     description:
-      "You control three Workers. At the start of your turn, pass one Worker to your opponent; they must use it this turn.",
+      "Setup: Place 3 workers of your colour. Your Build: Instead of building with your worker that moved, you must build with one of your other workers.",
   },
   {
     id: "hestia",
@@ -497,7 +502,7 @@ export const POWERS: Power[] = [
     col: 5,
     bgaSlug: "Hestia",
     description:
-      "Your Worker may build one additional time, but only on a space not neighboring your other Worker.",
+      "Your Build: Your worker may build one additional time, but this cannot be on a perimeter space.",
   },
   {
     id: "hydra",
@@ -507,7 +512,7 @@ export const POWERS: Power[] = [
     col: 6,
     bgaSlug: "Hydra",
     description:
-      "Each time one of your Workers is removed from the board, place two new Workers on unoccupied spaces.",
+      "Setup: After placing your workers, place 4 Hydra heads on this card. The Hydra heads are treated as your workers. End of Your Turn: If none of your workers/heads neighbor each other, you may place a Hydra head in one of the lowest unoccupied spaces neighboring the worker/head you moved. Otherwise, you must return 1 Hydra head from the board to this card if able.",
   },
   {
     id: "jason",
@@ -517,7 +522,7 @@ export const POWERS: Power[] = [
     col: 1,
     bgaSlug: "Jason",
     description:
-      "Once per turn, your Worker may move to any unoccupied space on the board.",
+      "Setup: Take 3 workers of your color. Place 2 on this card, and 1 on the board. Alternative Turn (optional): Place a worker from this card on an unoccupied perimeter space that is on the ground-level. This worker then builds.",
   },
   {
     id: "khione",
@@ -527,7 +532,7 @@ export const POWERS: Power[] = [
     col: 2,
     bgaSlug: null, // No BGA guide page
     description:
-      "Once per turn, after building, you may place a dome on any unoccupied space at any level.",
+      "Start of Your Turn: You must roll the die. End of Your Turn: Your moved worker freezes the neighboring space in the direction shown by the die. This space is frozen until the start of your next turn.",
   },
   {
     id: "kratos",
@@ -537,7 +542,7 @@ export const POWERS: Power[] = [
     col: 3,
     bgaSlug: null, // No BGA guide page
     description:
-      "Once per turn, you may remove an opponent's Worker from the board and place it on any unoccupied space.",
+      "End of Your Turn: You may select a block (not dome) with nothing on it neighboring one of your workers. Force the selected block one space orthogonally along the same level, to a destination with no worker or token on it. Repeat as much as you like.",
   },
   {
     id: "maenads",
@@ -547,7 +552,7 @@ export const POWERS: Power[] = [
     col: 4,
     bgaSlug: "Maenads",
     description:
-      "Each time an opponent builds, you may move one of your Workers.",
+      "End of Your Turn: If your worker neighbors an opponent's worker on opposite sides, that opponent loses the game.",
   },
   {
     id: "medea",
@@ -557,7 +562,7 @@ export const POWERS: Power[] = [
     col: 5,
     bgaSlug: "Medea",
     description:
-      "Once per turn, after moving, you may remove a block from any space neighboring your Worker.",
+      "End of Your Turn: You may remove one or two blocks from under a worker neighboring your unmoved worker. Place the removed blocks on this card. If this card has 2 or more blocks on it, it has no powers.",
   },
   {
     id: "prometheus",
@@ -567,7 +572,7 @@ export const POWERS: Power[] = [
     col: 6,
     bgaSlug: "Prometheus",
     description:
-      "If your Worker does not move up, it may build both before and after moving.",
+      "Alternative Turn (optional): As long as you do not move up a level, one of your workers may build, move, and build again.",
   },
   {
     id: "terpsichore",
@@ -576,7 +581,8 @@ export const POWERS: Power[] = [
     row: 2,
     col: 1,
     bgaSlug: "Terpsichore",
-    description: "All your Workers must move, then all must build.",
+    description:
+      "Your Turn: Each of your workers must move, and then each must build.",
   },
   {
     id: "theseus",
@@ -586,7 +592,7 @@ export const POWERS: Power[] = [
     col: 2,
     bgaSlug: "Theseus",
     description:
-      "Once per turn, your Worker may move to any unoccupied space that is not on the perimeter.",
+      "End of Your Turn (Once Per Game): Each of your workers may remove any opponent workers who are neighboring them and are at least 2 levels higher.",
   },
   {
     id: "tyche",
@@ -596,7 +602,7 @@ export const POWERS: Power[] = [
     col: 3,
     bgaSlug: "Tyche",
     description:
-      "At the start of your turn, roll a die to determine a special action you may take this turn.",
+      "Setup: After placing your workers, roll the die. Start of Your Turn: You may choose any one worker that neighbors yours, and force them into one of their neighboring spaces which matches the level shown on the die. This cannot force them up or down more than one level.",
   },
   {
     id: "urania",
@@ -606,7 +612,7 @@ export const POWERS: Power[] = [
     col: 4,
     bgaSlug: "Urania",
     description:
-      "Your Workers can move to any unoccupied space, regardless of level difference.",
+      "Your Turn: Your worker may move/build off the edge (or corner) of the board, by moving/building into the space on its opposite edge (or corner).",
   },
   {
     id: "pandora",
@@ -616,7 +622,7 @@ export const POWERS: Power[] = [
     col: 5,
     bgaSlug: null, // No BGA guide page
     description:
-      "Once per turn, you may use the power of any god card that has been removed from the game.",
+      "Setup: After placing your workers, roll the die and hide it from your opponents. Alternative Turn (optional): You may reveal the die. Then simultaneously for each worker, force them one space in the direction shown by the die, if possible. You must then secretly roll the die.",
   },
 
   // ── OLYMPUS ──────────────────────────────────────────────────────────────
@@ -628,7 +634,7 @@ export const POWERS: Power[] = [
     col: 1,
     bgaSlug: "Aeolus",
     description:
-      "Once per turn, you may move any one block to an unoccupied neighboring space at the same level.",
+      "Setup: Place the wind token sunny-side up beside this card. End of Your Turn: You may turn over the wind token. If you turned it to the windy side, point the arrow in one of the eight directions. Every Move: No worker can move directly opposing the arrow's direction.",
   },
   {
     id: "aloadae",
@@ -637,7 +643,8 @@ export const POWERS: Power[] = [
     row: 0,
     col: 2,
     bgaSlug: null, // No BGA guide page
-    description: "Your Workers can move up two levels instead of one.",
+    description:
+      "Alternative Turn (optional): Instead of building normally, build before you move. This build must be in a space that neighbors each of your workers. Then, move with each of your workers. You cannot win during these moves.",
   },
   {
     id: "boreas",
@@ -647,7 +654,7 @@ export const POWERS: Power[] = [
     col: 3,
     bgaSlug: null, // No BGA guide page
     description:
-      "Once per turn, after moving, you may push an opponent's neighboring Worker one space away.",
+      "Start of Your Turn: Each of your workers ice-blasts their neighboring space to the North, removing any opponent worker there from the game.",
   },
   {
     id: "daedalus",
@@ -656,7 +663,8 @@ export const POWERS: Power[] = [
     row: 0,
     col: 4,
     bgaSlug: null, // No BGA guide page
-    description: "Your Worker may build any number of times on the same space.",
+    description:
+      "Setup: Take a complete tower and place it on this card. End of Your Turn: You may build any number of the blocks or domes from this card in spaces neighboring your workers. Blocks must be built at their correct level. The dome may be placed at any level.",
   },
   {
     id: "eirene",
@@ -666,7 +674,7 @@ export const POWERS: Power[] = [
     col: 5,
     bgaSlug: null, // No BGA guide page
     description:
-      "Opponent Workers cannot move to spaces neighboring both of your Workers.",
+      "End of Your Turn: You may select an opponent worker. If any unoccupied spaces neighbor both the opponent worker and your moved worker, you must build in all those spaces.",
   },
   {
     id: "europa-talus",
@@ -676,7 +684,7 @@ export const POWERS: Power[] = [
     col: 6,
     bgaSlug: "Europa",
     description:
-      "You control three Workers. After moving, the unmoved Worker may build.",
+      "Setup: Place Talus and your workers in unoccupied spaces. End of Your Turn: You may relocate Talus to an unoccupied space neighboring your moved worker. Talus' space is frozen.",
   },
   {
     id: "harpies",
@@ -686,7 +694,7 @@ export const POWERS: Power[] = [
     col: 1,
     bgaSlug: "Harpies",
     description:
-      "Once per turn, after an opponent moves, you may move one of your Workers to any unoccupied space.",
+      "Opponent's Turn: Each time an opponent's worker moves, they are then forced space by space in the same direction until the next space is at a higher level, has a token on it, or is occupied.",
   },
   {
     id: "helios",
@@ -696,7 +704,7 @@ export const POWERS: Power[] = [
     col: 2,
     bgaSlug: null, // No BGA guide page
     description:
-      "Your Workers may move to any unoccupied space on the same level.",
+      "Setup: Place the sun token and your workers in unoccupied spaces. Your Turn: If your worker moves onto the sun token you must force your worker to any other unoccupied space at the same height, build in the sun token space, then build normally. You cannot win on a turn that you move to the sun token space.",
   },
   {
     id: "heracles",
@@ -706,7 +714,7 @@ export const POWERS: Power[] = [
     col: 3,
     bgaSlug: "Heracles",
     description:
-      "Once per turn, your Worker may build a dome at any level, but you cannot win this turn.",
+      "Alternative Build (Once Per Game): Each of your workers may build any number of domes in neighboring spaces (at any level).",
   },
   {
     id: "hermes",
@@ -716,7 +724,7 @@ export const POWERS: Power[] = [
     col: 4,
     bgaSlug: "Hermes",
     description:
-      "If your Workers do not move up or down, they may each move any number of times.",
+      "Your Turn: If your workers do not move up or down levels, they may each move any number of times (even zero), and then one of them must build.",
   },
   {
     id: "hesperides",
@@ -726,7 +734,7 @@ export const POWERS: Power[] = [
     col: 5,
     bgaSlug: null, // No BGA guide page
     description:
-      "Once per turn, after building, you may move a block from any space to an unoccupied space.",
+      "Setup: Place 3 workers of your color, then roll the die. End of Your Turn: You must move one of your workers in the direction shown by the die. You cannot win on this extra move. Then you may roll the die.",
   },
   {
     id: "nike",
@@ -736,7 +744,7 @@ export const POWERS: Power[] = [
     col: 6,
     bgaSlug: null, // No BGA guide page
     description:
-      "Each time you win, you gain a victory token. The first player to 3 tokens wins the match.",
+      "Opponent's Turn: If one of your workers moved down a level on your turn, opponents cannot move up levels until your next turn.",
   },
   {
     id: "pleiades",
@@ -746,7 +754,7 @@ export const POWERS: Power[] = [
     col: 1,
     bgaSlug: null, // No BGA guide page
     description:
-      "You control seven Workers, one per space in a column. Each turn, move and build with any one.",
+      "Start of Your Turn: You may choose one of your workers that is at a lower level than a neighboring opponent worker. Force the chosen worker to an unoccupied level-1 block anywhere on the board.",
   },
   {
     id: "polyhymnia",
@@ -756,7 +764,7 @@ export const POWERS: Power[] = [
     col: 2,
     bgaSlug: null, // No BGA guide page
     description:
-      "Once per turn, after building, you may move one of your Workers to any unoccupied space.",
+      "Setup: Before other players setup, place 1-5 sacred tokens (each covering 0, 1 or 2 blocks). Your Move: If you move onto a space with a sacred token you must immediately move your selected worker again. Sacred token spaces are frozen.",
   },
   {
     id: "selene",
@@ -766,7 +774,7 @@ export const POWERS: Power[] = [
     col: 3,
     bgaSlug: "Selene",
     description:
-      "Once per turn, your Worker may build a dome on any level, but only at night (odd turns).",
+      "Setup: Place one male and one female worker of your color. Alternative Build (optional): Instead of a normal build, you may build a dome (at any level) in a space neighboring your female worker (even if you moved your male worker).",
   },
   {
     id: "stymphalians",
@@ -776,7 +784,7 @@ export const POWERS: Power[] = [
     col: 4,
     bgaSlug: null, // No BGA guide page
     description:
-      "Once per turn, after moving, you may remove all blocks from a neighboring space.",
+      "Setup: Place 3 workers of your color. Your Move: Your workers must always move 2 or 3 spaces. They cannot end in their starting space, or any space which neighbors it. Win Restriction: You cannot win in the first space you move to on your turn.",
   },
   {
     id: "gryphus",
@@ -786,7 +794,7 @@ export const POWERS: Power[] = [
     col: 5,
     bgaSlug: null, // No BGA guide page
     description:
-      "Your Workers may move to any unoccupied space up to 2 spaces away, ignoring level restrictions.",
+      "Setup: After placing your workers, roll the die. Alternative Turn (optional): You may force one of your workers onto a neighboring dome in the direction shown on the die. Remove that dome, then move and build with this worker. End of Your Turn: You may roll the die.",
   },
 
   // ── POSEIDON ─────────────────────────────────────────────────────────────
@@ -798,7 +806,7 @@ export const POWERS: Power[] = [
     col: 1,
     bgaSlug: null, // No BGA guide page
     description:
-      "Once per turn, after moving, you may move an opponent's Worker one space.",
+      "Setup: After placing your workers, place 2 Soldiers. These Soldiers are treated as your workers, but you cannot win with them.",
   },
   {
     id: "achilles",
@@ -807,7 +815,8 @@ export const POWERS: Power[] = [
     row: 0,
     col: 2,
     bgaSlug: "Achilles",
-    description: "Your Worker may move and build up to two times each turn.",
+    description:
+      "Your Turn (Once Per Game): Your worker builds both before and after moving.",
   },
   {
     id: "ares",
@@ -817,7 +826,7 @@ export const POWERS: Power[] = [
     col: 3,
     bgaSlug: "Ares",
     description:
-      "After your turn, remove a block from any space your unmoved Worker neighbors.",
+      "End of Your Turn: You may remove an unoccupied block (not dome) neighboring your unmoved worker. You also remove any tokens on the block.",
   },
   {
     id: "charybdis",
@@ -827,7 +836,7 @@ export const POWERS: Power[] = [
     col: 4,
     bgaSlug: "Charybdis",
     description:
-      "Once per turn, you may swap the positions of any two blocks on the board.",
+      "Setup: Place 2 whirlpool tokens on this card. End of Your Turn: You may put a whirlpool from this card on any unoccupied space. If there are two unoccupied whirlpools, when a worker would move onto one they are instead forced to the other. If this forces them to level-3, they win.",
   },
   {
     id: "clio",
@@ -837,7 +846,7 @@ export const POWERS: Power[] = [
     col: 5,
     bgaSlug: "Clio",
     description:
-      "Once per turn, after building, you may place a token on the built space granting a special ability.",
+      "Your Build: You must place an ancient coin token on each of the first 3 blocks your workers build. Ancient coin spaces are frozen — players cannot move, build or use god powers into frozen spaces.",
   },
   {
     id: "echo",
@@ -847,7 +856,7 @@ export const POWERS: Power[] = [
     col: 6,
     bgaSlug: null, // No BGA guide page
     description:
-      "Once per turn, you may copy the power of an opponent's god for this turn.",
+      "Setup: Place the Echo token on any god card held by another player. Echo acts as a duplicate of the card that has the Echo token on it.",
   },
   {
     id: "enodia",
@@ -857,7 +866,7 @@ export const POWERS: Power[] = [
     col: 1,
     bgaSlug: null, // No BGA guide page
     description:
-      "Your Workers may move to any unoccupied space on the perimeter.",
+      "Alternative Win Condition: You also win if at the end of your turn, any 3x3 square on the board has each of its corners occupied by domes and/or anyone's workers.",
   },
   {
     id: "gaea",
@@ -867,7 +876,7 @@ export const POWERS: Power[] = [
     col: 2,
     bgaSlug: "Gaea",
     description:
-      "Once per turn, after building, you may place an additional block on any unoccupied space.",
+      "Setup: Take 2 extra workers of your color kept on this card. Every Build: When any worker builds a dome, you may immediately place a worker from this card onto an unoccupied ground-level space neighboring the dome.",
   },
   {
     id: "hephaestus",
@@ -877,7 +886,7 @@ export const POWERS: Power[] = [
     col: 3,
     bgaSlug: "Hephaestus",
     description:
-      "Your Worker may build one additional block on top of your first block, but not on a space at the third level.",
+      "Your Build: Your worker may build one additional block (not dome) on top of your first block.",
   },
   {
     id: "hippolyta",
@@ -887,7 +896,7 @@ export const POWERS: Power[] = [
     col: 4,
     bgaSlug: "Hippolyta",
     description:
-      "Once per turn, after moving, you may remove an opponent's Worker from a neighboring space.",
+      "Setup: Place one male and one female worker of your color. Your female worker moves normally. All other workers (yours and opponents') can only move diagonally.",
   },
   {
     id: "melpomene",
@@ -897,7 +906,7 @@ export const POWERS: Power[] = [
     col: 5,
     bgaSlug: null, // No BGA guide page
     description:
-      "Once per turn, you may move a block from any space to an unoccupied neighboring space.",
+      "Alternative Win Condition: You also win if at the start of your turn, each of your workers has a neighboring opponent worker at a higher level.",
   },
   {
     id: "moros",
@@ -907,7 +916,7 @@ export const POWERS: Power[] = [
     col: 6,
     bgaSlug: null, // No BGA guide page
     description:
-      "At the start of your turn, place a doom token on an opponent's Worker. If that Worker ends a turn on level 2 or higher, remove it.",
+      "Setup: Place 4 doom tokens and 4 workers of your color, each on separate perimeter spaces. Doom spaces are frozen. After Your Move: You must force any doom token to the space you moved out of. Win Restriction: You cannot win normally. You win by moving up to the third level if another one of your workers is already at the third level.",
   },
   {
     id: "odysseus",
@@ -917,7 +926,7 @@ export const POWERS: Power[] = [
     col: 1,
     bgaSlug: "Odysseus",
     description:
-      "Once per turn, force an opponent's Worker to move to any unoccupied space.",
+      "Setup: Place the die beside the board. When Anyone Completes a Tower: You may place the die on this card and roll it. End of Your Turn: If the die is on this card, you must select 1 worker and force them in the direction shown by the die. When Opponent Completes a Tower: If the die is on this card, this god power is removed from the game.",
   },
   {
     id: "proteus",
@@ -927,7 +936,7 @@ export const POWERS: Power[] = [
     col: 2,
     bgaSlug: "Proteus",
     description:
-      "Once per turn, you may change your god power to any other god in play.",
+      "Setup: Place 3 workers of your color. After Your Move: You must force one of your other workers into the space you just vacated.",
   },
   {
     id: "pythia",
@@ -937,7 +946,7 @@ export const POWERS: Power[] = [
     col: 3,
     bgaSlug: null, // No BGA guide page
     description:
-      "Once per turn, look at the top card of the god deck and optionally place it at the bottom.",
+      "Before Your Move: Going clockwise around the table starting with you, each player touches one of their workers; this becomes the worker each player must move next.",
   },
   {
     id: "siren",
@@ -947,7 +956,7 @@ export const POWERS: Power[] = [
     col: 4,
     bgaSlug: "Siren",
     description:
-      "Once per turn, you may move an opponent's Worker to any unoccupied space neighboring your Worker.",
+      "Your Move: You may choose not to move (though you must still build) and instead force one or more opponent workers one space South to an unoccupied space at any level.",
   },
   {
     id: "poseidon-god",
@@ -957,7 +966,7 @@ export const POWERS: Power[] = [
     col: 5,
     bgaSlug: "Poseidon",
     description:
-      "If your unmoved Worker is on the ground level, it may build up to three times.",
+      "End of Your Turn: If your unmoved worker is on the ground level, they may build up to two additional times.",
   },
 
   // ── UNDERWORLD ───────────────────────────────────────────────────────────
@@ -969,7 +978,7 @@ export const POWERS: Power[] = [
     col: 1,
     bgaSlug: null, // No BGA guide page
     description:
-      "Each time an opponent's Worker moves, it must move to a space neighboring one of your Workers if possible.",
+      "Setup: Place 3 workers of your color. End of Your Turn: If all three of your workers are not on the ground level, then any opponent workers neighboring all three of your workers are removed from the game.",
   },
   {
     id: "charon",
@@ -979,7 +988,7 @@ export const POWERS: Power[] = [
     col: 2,
     bgaSlug: "Charon",
     description:
-      "Before your Worker moves, you may force a neighboring opponent Worker to the space directly on the other side of your Worker.",
+      "Your Move: You may choose not to move and instead force a neighboring opponent worker to the space directly on the other side of your worker, if that space is unoccupied.",
   },
   {
     id: "chronus",
@@ -989,7 +998,7 @@ export const POWERS: Power[] = [
     col: 3,
     bgaSlug: "Chronus",
     description:
-      "You also win when there are at least five Complete Towers on the board.",
+      "Alternative Win Condition: You also win if at the end of your turn, there are at least 4 complete towers on the board.",
   },
   {
     id: "hades",
@@ -999,7 +1008,7 @@ export const POWERS: Power[] = [
     col: 4,
     bgaSlug: "Hades",
     description:
-      "Opponent Workers cannot build blocks on spaces at a lower level than the space they moved from.",
+      "Opponent's Turn: Opponent workers cannot move down to lower levels.",
   },
   {
     id: "hecate",
@@ -1009,7 +1018,7 @@ export const POWERS: Power[] = [
     col: 5,
     bgaSlug: "Hecate",
     description:
-      "Once per turn, after building, you may move a block from any space to any other unoccupied space.",
+      "Setup: Hide the mini-map behind the shield. After others place their workers, your workers are placed as secret worker markers on the mini-map. Your Turn: Move a worker marker on the mini-map as if it were a worker on the board. Build on the board, as normal. If an opponent's attempted play is not legal because of your secret workers, that play is cancelled and their turn ends.",
   },
   {
     id: "hypnus",
@@ -1019,7 +1028,7 @@ export const POWERS: Power[] = [
     col: 6,
     bgaSlug: "Hypnus",
     description:
-      "Once per turn, you may put an opponent's Worker to sleep; it cannot move next turn.",
+      "Start of Opponent's Turn: If one of the opponent's workers is at a higher level than all of their others, that worker cannot move.",
   },
   {
     id: "mnemosyne",
@@ -1029,7 +1038,7 @@ export const POWERS: Power[] = [
     col: 1,
     bgaSlug: null, // No BGA guide page
     description:
-      "Once per turn, you may swap the positions of your two Workers.",
+      "Setup: Hide the mini-map with 2 worker markers beside it using the shield. End of Your Turn: You may either secretly record the position of both your workers on the mini-map, or reveal the mini-map and force as many of your workers as possible to those recorded positions.",
   },
   {
     id: "moerae",
@@ -1039,7 +1048,7 @@ export const POWERS: Power[] = [
     col: 2,
     bgaSlug: null, // No BGA guide page
     description:
-      "At the start of your turn, you may move any one block to an unoccupied space.",
+      "Setup: Hide the mini-map behind the shield, then secretly place the fate marker so it covers a 2x2 square of spaces. Place 3 workers of your color. Alternative Win Condition: If an opponent wins and their last move was into one of the fate marker spaces, you win instead.",
   },
   {
     id: "morpheus",
@@ -1049,7 +1058,7 @@ export const POWERS: Power[] = [
     col: 3,
     bgaSlug: "Morpheus",
     description:
-      "Once per turn, you may move an opponent's Worker to any unoccupied space.",
+      "Setup: Form a supply of 8 dream tokens. Start of Your Turn: Collect a dream token (max 8). Your Build: Your moved worker does not build as normal. Instead, any number of times (even zero) you may spend a dream token to build with this worker.",
   },
   {
     id: "nemesis",
@@ -1059,7 +1068,7 @@ export const POWERS: Power[] = [
     col: 4,
     bgaSlug: "Nemesis",
     description:
-      "If an opponent has more Workers on higher levels than you, you may move one of their Workers down one level.",
+      "End of Your Turn: If one of your opponents has no workers neighboring your workers, you may swap spaces with that opponent (the workers are forced). If your chosen opponent has a different number of workers than you, you choose which ones are swapped.",
   },
   {
     id: "orpheus-eurydice",
@@ -1069,7 +1078,7 @@ export const POWERS: Power[] = [
     col: 5,
     bgaSlug: null, // No BGA guide page exists for Orpheus & Eurydice
     description:
-      "You control three Workers. If one of your Workers is removed, you may place it back on any unoccupied space.",
+      "Setup: Place a male and a female worker of your color. End of Turn: If you moved your male worker to a space at a higher level than your female worker this turn, you may move and build with your female worker.",
   },
   {
     id: "persephone",
@@ -1078,7 +1087,8 @@ export const POWERS: Power[] = [
     row: 1,
     col: 6,
     bgaSlug: "Persephone",
-    description: "Other players must move up whenever possible.",
+    description:
+      "Opponent's Turn: At least one worker must move up a level this turn if possible.",
   },
   {
     id: "phobos",
@@ -1088,7 +1098,7 @@ export const POWERS: Power[] = [
     col: 1,
     bgaSlug: null, // No BGA guide page
     description:
-      "Once per turn, after moving, opponent Workers neighboring your Worker cannot build this turn.",
+      "End of Your Turn: You may force an opponent's worker neighboring your unmoved worker one space directly away from it at any level, as long as that space is unoccupied.",
   },
   {
     id: "sisyphus",
@@ -1098,7 +1108,7 @@ export const POWERS: Power[] = [
     col: 2,
     bgaSlug: null, // No BGA guide page
     description:
-      "Your Workers can always move up, even if the level difference is more than one.",
+      "Setup: Place the boulder and your workers in unoccupied spaces. The boulder's space is frozen. End of Your Turn: If at least one of your workers neighbors the boulder, you may move it (like a worker). Alternative Win Condition: You also win if the boulder reaches the third level.",
   },
   {
     id: "tartarus",
@@ -1108,7 +1118,7 @@ export const POWERS: Power[] = [
     col: 3,
     bgaSlug: "Tartarus",
     description:
-      "Once per turn, you may banish an opponent's Worker to an isolated space for one turn.",
+      "Setup: Players place their workers in clockwise order starting with you. Hide the mini-map behind the shield. Choose an unoccupied space and secretly mark it on the mini-map using the Abyss marker. Loss condition: If anyone's worker enters the Abyss, that player loses immediately.",
   },
   {
     id: "typhon",
@@ -1118,7 +1128,7 @@ export const POWERS: Power[] = [
     col: 4,
     bgaSlug: null, // No BGA guide page
     description:
-      "Once per turn, you may move all opponent Workers one space in the same direction.",
+      "Alternative Moves (optional): Titanic Heave: After you move, if a dome neighbors your vacated space, you may force the dome into that space. OR Mighty Leap: Your worker may force itself onto a dome's space (at any height). The dome is then forced one space in the same direction, to an unoccupied space at any level.",
   },
   {
     id: "arachne",
@@ -1128,7 +1138,7 @@ export const POWERS: Power[] = [
     col: 5,
     bgaSlug: null, // No BGA guide page
     description:
-      "Once per turn, after building, you may place a web token on a neighboring space. Workers cannot move through web spaces.",
+      "Setup: Place 8 weave tokens on this card. End of Your Turn: You may take a weave token and place it on an unoccupied neighboring space at the same or lower level as your unmoved worker. Weave tokens are returned when built upon. Opponent's Move: Opponent workers cannot move out of spaces with weave tokens on them.",
   },
 ];
 
