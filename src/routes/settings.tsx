@@ -5,10 +5,15 @@ import { Checkbox } from "../components/ui/checkbox";
 import { EXPANSIONS } from "../data/powers";
 import { useBackButton } from "../hooks/useBackButton";
 import { useExpansions } from "../hooks/useExpansions";
+import { useSpecialConditions } from "../hooks/useSpecialConditions";
+import { useDice } from "../hooks/useDice";
 
 export function SettingsScreen() {
   const navigate = useNavigate();
   const [activeExpansions, toggleExpansion] = useExpansions();
+  const [includeSpecialConditions, toggleSpecialConditions] =
+    useSpecialConditions();
+  const [includeDice, toggleDice] = useDice();
   const noneSelected = activeExpansions.length === 0;
   useBackButton(() => {
     if (!noneSelected) navigate({ to: "/others" });
@@ -60,6 +65,44 @@ export function SettingsScreen() {
           );
         })}
       </ul>
+
+      <li className="flex items-center gap-4 rounded-lg border border-white/10 bg-white/5 px-4 py-3 w-full list-none">
+        <span className="flex-1 text-sm font-medium text-white">
+          Include gods with special conditions
+        </span>
+        <Link
+          to="/gods"
+          search={{ specialConditions: true, dice: false }}
+          className="text-xs text-white underline underline-offset-2 hover:text-white/80 min-h-[44px] min-w-[44px] flex items-center justify-center shrink-0"
+        >
+          View Gods
+        </Link>
+        <Checkbox
+          checked={includeSpecialConditions}
+          onCheckedChange={toggleSpecialConditions}
+          aria-label="Include gods with special conditions"
+          className="shrink-0"
+        />
+      </li>
+
+      <li className="flex items-center gap-4 rounded-lg border border-white/10 bg-white/5 px-4 py-3 w-full list-none">
+        <span className="flex-1 text-sm font-medium text-white">
+          Include gods with dice
+        </span>
+        <Link
+          to="/gods"
+          search={{ specialConditions: false, dice: true }}
+          className="text-xs text-white underline underline-offset-2 hover:text-white/80 min-h-[44px] min-w-[44px] flex items-center justify-center shrink-0"
+        >
+          View Gods
+        </Link>
+        <Checkbox
+          checked={includeDice}
+          onCheckedChange={toggleDice}
+          aria-label="Include gods with dice"
+          className="shrink-0"
+        />
+      </li>
 
       <Button
         variant="back"

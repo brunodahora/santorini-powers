@@ -12,6 +12,8 @@ import {
 import { MATCHUPS, POWERS, type Power } from "../data/powers";
 import { useBackButton } from "../hooks/useBackButton";
 import { useExpansions } from "../hooks/useExpansions";
+import { useSpecialConditions } from "../hooks/useSpecialConditions";
+import { useDice } from "../hooks/useDice";
 import { pickMatchup, pickOne, pickTwo } from "../lib/randomizer";
 
 /** Renders a PowerCard at 2x scale, centered. */
@@ -34,6 +36,8 @@ export function ResultScreen() {
   const navigate = useNavigate();
   const { mode, ids } = useSearch({ from: "/result" });
   const [activeExpansions] = useExpansions();
+  const [includeSpecialConditions] = useSpecialConditions();
+  const [includeDice] = useDice();
   const [copied, setCopied] = useState(false);
 
   const idList = ids
@@ -84,16 +88,32 @@ export function ResultScreen() {
 
   function reRandomize() {
     if (mode === "one") {
-      const p = pickOne(POWERS, activeExpansions);
+      const p = pickOne(
+        POWERS,
+        activeExpansions,
+        includeSpecialConditions,
+        includeDice,
+      );
       navigate({ to: "/result", search: { mode: "one", ids: p.id } });
     } else if (mode === "two") {
-      const [p1, p2] = pickTwo(POWERS, activeExpansions);
+      const [p1, p2] = pickTwo(
+        POWERS,
+        activeExpansions,
+        includeSpecialConditions,
+        includeDice,
+      );
       navigate({
         to: "/result",
         search: { mode: "two", ids: `${p1.id},${p2.id}` },
       });
     } else {
-      const result = pickMatchup(POWERS, MATCHUPS, activeExpansions);
+      const result = pickMatchup(
+        POWERS,
+        MATCHUPS,
+        activeExpansions,
+        includeSpecialConditions,
+        includeDice,
+      );
       if (result) {
         const [p1, p2] = result;
         navigate({

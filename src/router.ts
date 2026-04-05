@@ -48,6 +48,11 @@ const godsRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/gods",
   component: GodsListScreen,
+  validateSearch: (search: Record<string, unknown>) => ({
+    specialConditions:
+      search.specialConditions === true || search.specialConditions === "true",
+    dice: search.dice === true || search.dice === "true",
+  }),
 });
 
 const expansionRoute = createRoute({

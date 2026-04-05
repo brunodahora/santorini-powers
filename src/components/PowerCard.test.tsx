@@ -6,7 +6,6 @@ import type { Power } from "../data/powers";
 
 import { PowerCard } from "./PowerCard";
 
-
 // Stub Image to avoid errors in jsdom
 class StubImage {
   onload: (() => void) | null = null;
@@ -23,6 +22,8 @@ const mockPower: Power = {
   col: 2,
   description: "Your Worker may move into an opponent Worker's space.",
   bgaSlug: "Apollo",
+  specialConditions: false,
+  dice: false,
 };
 
 const mockPowerNoSlug: Power = {

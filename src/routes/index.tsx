@@ -4,11 +4,15 @@ import { useState } from "react";
 import { Button } from "../components/ui/button";
 import { MATCHUPS, POWERS } from "../data/powers";
 import { useExpansions } from "../hooks/useExpansions";
+import { useSpecialConditions } from "../hooks/useSpecialConditions";
+import { useDice } from "../hooks/useDice";
 import { pickMatchup, pickOne, pickTwo } from "../lib/randomizer";
 
 export function SelectionScreen() {
   const navigate = useNavigate();
   const [activeExpansions] = useExpansions();
+  const [includeSpecialConditions] = useSpecialConditions();
+  const [includeDice] = useDice();
   const [matchupError, setMatchupError] = useState(false);
 
   // Determine if any valid matchup exists for the current active expansions
@@ -19,12 +23,22 @@ export function SelectionScreen() {
   );
 
   function handlePickOne() {
-    const power = pickOne(POWERS, activeExpansions);
+    const power = pickOne(
+      POWERS,
+      activeExpansions,
+      includeSpecialConditions,
+      includeDice,
+    );
     navigate({ to: "/result", search: { mode: "one", ids: power.id } });
   }
 
   function handlePickTwo() {
-    const [p1, p2] = pickTwo(POWERS, activeExpansions);
+    const [p1, p2] = pickTwo(
+      POWERS,
+      activeExpansions,
+      includeSpecialConditions,
+      includeDice,
+    );
     navigate({
       to: "/result",
       search: { mode: "two", ids: `${p1.id},${p2.id}` },
@@ -32,7 +46,13 @@ export function SelectionScreen() {
   }
 
   function handleMatchup() {
-    const result = pickMatchup(POWERS, MATCHUPS, activeExpansions);
+    const result = pickMatchup(
+      POWERS,
+      MATCHUPS,
+      activeExpansions,
+      includeSpecialConditions,
+      includeDice,
+    );
     if (result === null) {
       setMatchupError(true);
       return;

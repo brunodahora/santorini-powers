@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate, useSearch } from "@tanstack/react-router";
 import { useState } from "react";
 
 import { SpriteImage } from "../components/SpriteImage";
@@ -11,56 +11,68 @@ export function GodsListScreen() {
   const navigate = useNavigate();
   const [activeExpansions] = useExpansions();
   const [filter, setFilter] = useState<ExpansionId | "all">("all");
-  useBackButton(() => navigate({ to: "/others" }));
+  const { specialConditions: showSpecialConditions, dice: showDice } = useSearch({ from: "/gods" });
+  const isFilterMode = showSpecialConditions || showDice;
+  useBackButton(() => navigate({ to: isFilterMode ? "/settings" : "/others" }));
 
   const availableExpansions = EXPANSIONS.filter((e) =>
     activeExpansions.includes(e.id),
   );
 
   const visiblePowers = POWERS.filter((p) => {
+    if (showSpecialConditions) return p.specialConditions;
+    if (showDice) return p.dice;
     if (!activeExpansions.includes(p.expansion)) return false;
     if (filter !== "all" && p.expansion !== filter) return false;
     return true;
   });
 
+  const heading = showSpecialConditions
+    ? "Gods with Special Conditions"
+    : showDice
+      ? "Gods with Dice"
+      : "Browse Gods";
+
   return (
     <div className="flex flex-col items-center gap-6 px-4 py-8 max-w-2xl lg:max-w-4xl mx-auto w-full flex-1">
-      <h1 className="text-2xl font-semibold text-white">Browse Gods</h1>
+      <h1 className="text-2xl font-semibold text-white">{heading}</h1>
 
-      {/* Filter bar */}
-      <div
-        className="flex flex-wrap gap-2 justify-center w-full"
-        role="group"
-        aria-label="Filter by expansion"
-      >
-        <button
-          onClick={() => setFilter("all")}
-          className={[
-            "min-h-[44px] px-4 rounded-lg text-sm font-medium transition-colors",
-            filter === "all"
-              ? "bg-white text-[#0a1628]"
-              : "bg-white/10 text-white hover:bg-white/20",
-          ].join(" ")}
-          aria-pressed={filter === "all"}
+      {/* Filter bar — hidden in filter modes */}
+      {!isFilterMode && (
+        <div
+          className="flex flex-wrap gap-2 justify-center w-full"
+          role="group"
+          aria-label="Filter by expansion"
         >
-          All
-        </button>
-        {availableExpansions.map((exp) => (
           <button
-            key={exp.id}
-            onClick={() => setFilter(exp.id)}
+            onClick={() => setFilter("all")}
             className={[
               "min-h-[44px] px-4 rounded-lg text-sm font-medium transition-colors",
-              filter === exp.id
+              filter === "all"
                 ? "bg-white text-[#0a1628]"
                 : "bg-white/10 text-white hover:bg-white/20",
             ].join(" ")}
-            aria-pressed={filter === exp.id}
+            aria-pressed={filter === "all"}
           >
-            {exp.name}
+            All
           </button>
-        ))}
-      </div>
+          {availableExpansions.map((exp) => (
+            <button
+              key={exp.id}
+              onClick={() => setFilter(exp.id)}
+              className={[
+                "min-h-[44px] px-4 rounded-lg text-sm font-medium transition-colors",
+                filter === exp.id
+                  ? "bg-white text-[#0a1628]"
+                  : "bg-white/10 text-white hover:bg-white/20",
+              ].join(" ")}
+              aria-pressed={filter === exp.id}
+            >
+              {exp.name}
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Powers grid */}
       {visiblePowers.length === 0 ? (
@@ -87,6 +99,9 @@ export function GodsListScreen() {
                 />
                 <span className="text-xs text-white text-center leading-tight">
                   {power.name}
+                  {power.specialConditions && !showSpecialConditions && (
+                    <span aria-label="has special conditions"> *</span>
+                  )}
                 </span>
               </Link>
             </li>
@@ -95,7 +110,7 @@ export function GodsListScreen() {
       )}
 
       <Link
-        to="/others"
+        to={isFilterMode ? "/settings" : "/others"}
         className="min-h-[44px] px-4 md:inline-flex hidden items-center justify-center text-sm font-medium text-white/70 hover:text-white underline-offset-4 hover:underline"
       >
         ← Back
