@@ -5,15 +5,14 @@ import {
 } from "@tanstack/react-router";
 
 import { RootLayout } from "./routes/__root";
+import { ExpansionGodListScreen } from "./routes/expansion.$id";
+import { GameModesScreen } from "./routes/game-modes";
+import { GameModeDetailScreen } from "./routes/game-modes.$id";
+import { GodsListScreen } from "./routes/gods";
 import { SelectionScreen } from "./routes/index";
 import { OthersScreen } from "./routes/others";
 import { ResultScreen } from "./routes/result";
 import { SettingsScreen } from "./routes/settings";
-
-// Lazy placeholder components for routes not yet implemented
-function NotYetImplemented() {
-  return null;
-}
 
 const rootRoute = createRootRoute({ component: RootLayout });
 
@@ -48,25 +47,25 @@ const settingsRoute = createRoute({
 const godsRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/gods",
-  component: NotYetImplemented,
+  component: GodsListScreen,
 });
 
 const expansionRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/expansion/$id",
-  component: NotYetImplemented,
+  component: ExpansionGodListScreen,
 });
 
 const gameModesRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/game-modes",
-  component: NotYetImplemented,
+  component: GameModesScreen,
 });
 
 const gameModesDetailRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: "/game-modes/$id",
-  component: NotYetImplemented,
+  component: GameModeDetailScreen,
 });
 
 const routeTree = rootRoute.addChildren([

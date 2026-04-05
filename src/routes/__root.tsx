@@ -7,7 +7,7 @@ export function RootLayout() {
         <img
           src="/img/title.png"
           alt="Santorini"
-          className="w-full object-contain"
+          className="w-full object-contain my-4"
         />
       </header>
       <main className="flex-1 flex flex-col">

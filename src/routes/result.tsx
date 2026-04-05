@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
 import { Link, useNavigate, useSearch } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 
 import { PowerCard } from "../components/PowerCard";
+import { Button } from "../components/ui/button";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   type CarouselApi,
 } from "../components/ui/carousel";
-import { Button } from "../components/ui/button";
 import { MATCHUPS, POWERS } from "../data/powers";
 import { useExpansions } from "../hooks/useExpansions";
 import { pickMatchup, pickOne, pickTwo } from "../lib/randomizer";

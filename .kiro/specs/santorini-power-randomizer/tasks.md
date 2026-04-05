@@ -158,26 +158,26 @@ Incremental build-up from tooling setup → core logic → shared components →
   - Back button → `/`
   - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9_
 
-- [ ] 12. Implement Expansion God List Screen (`src/routes/expansion.$id.tsx`)
+- [x] 12. Implement Expansion God List Screen (`src/routes/expansion.$id.tsx`)
   - Simple list of god names for the given expansion ID
   - Back button → `/settings`
   - _Requirements: 2.7_
 
-- [ ] 13. Implement Gods List Screen (`src/routes/gods.tsx`)
+- [x] 13. Implement Gods List Screen (`src/routes/gods.tsx`)
   - Grid of thumbnail cards (SpriteImage + name) for all powers from active expansions
   - Filter/group by expansion (Shadcn Tabs or filter bar)
   - Clicking a power navigates to `/result?mode=one&ids={power.id}`
   - Back button → `/`
   - _Requirements: 13.1, 13.2, 13.3, 13.4, 13.5, 13.6_
 
-- [ ] 14. Implement Game Modes screens
-  - [ ] 14.1 Implement `src/routes/game-modes.tsx`
+- [x] 14. Implement Game Modes screens
+  - [x] 14.1 Implement `src/routes/game-modes.tsx`
     - List all `GAME_MODES` from active expansions; each entry shows name + `SpriteImage` thumbnail (col 0)
     - Clicking navigates to `/game-modes/$id`
     - Back button → `/`
     - _Requirements: 14.1, 14.2, 14.3, 14.4, 14.7_
 
-  - [ ] 14.2 Implement `src/routes/game-modes.$id.tsx`
+  - [x] 14.2 Implement `src/routes/game-modes.$id.tsx`
     - Shows the game mode rule card at full/near-full size using `SpriteImage`
     - Back button → `/game-modes`
     - _Requirements: 14.5, 14.6_
