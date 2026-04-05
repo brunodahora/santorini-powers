@@ -1,4 +1,4 @@
-import { Link, useParams } from "@tanstack/react-router";
+import { useNavigate, useParams } from "@tanstack/react-router";
 
 import { Button } from "../components/ui/button";
 import { POWERS } from "../data/powers";
@@ -6,6 +6,7 @@ import type { ExpansionId } from "../data/powers";
 
 export function ExpansionGodListScreen() {
   const { id } = useParams({ from: "/expansion/$id" });
+  const navigate = useNavigate();
   const gods = POWERS.filter((p) => p.expansion === (id as ExpansionId));
 
   return (
@@ -28,8 +29,13 @@ export function ExpansionGodListScreen() {
         ))}
       </ul>
 
-      <Button asChild size="lg" variant="ghost" className="min-h-[44px] mt-2">
-        <Link to="/settings">← Back</Link>
+      <Button
+        variant="back"
+        size="lg"
+        className="min-h-[44px] mt-2"
+        onClick={() => navigate({ to: "/settings" })}
+      >
+        ← Back
       </Button>
     </div>
   );

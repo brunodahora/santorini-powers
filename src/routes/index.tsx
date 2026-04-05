@@ -60,21 +60,21 @@ export function SelectionScreen() {
       <div className="flex flex-col gap-3 w-full max-w-xs mt-4">
         <Button
           size="lg"
-          className="min-h-[44px] w-full"
+          className="min-h-[44px] w-full bg-[#F5F3EE] text-[#0F5F95] hover:bg-[#EAE8E2]"
           onClick={handlePickOne}
         >
           Pick One Power
         </Button>
         <Button
           size="lg"
-          className="min-h-[44px] w-full"
+          className="min-h-[44px] w-full bg-[#F5F3EE] text-[#0F5F95] hover:bg-[#EAE8E2]"
           onClick={handlePickTwo}
         >
           Pick Two Powers
         </Button>
         <Button
           size="lg"
-          className="min-h-[44px] w-full"
+          className="min-h-[44px] w-full bg-[#F5F3EE] text-[#0F5F95] hover:bg-[#EAE8E2]"
           onClick={handleMatchup}
           disabled={!hasValidMatchup}
         >
@@ -87,7 +87,7 @@ export function SelectionScreen() {
         )}
         <Button
           size="lg"
-          className="min-h-[44px] w-full"
+          className="min-h-[44px] w-full bg-[#F5F3EE] text-[#0F5F95] hover:bg-[#EAE8E2]"
           onClick={handleOthers}
         >
           Others

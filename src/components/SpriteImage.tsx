@@ -8,8 +8,12 @@ interface SpriteImageProps {
   expansion: ExpansionId;
   row: number;
   col: number;
-  /** Display size in CSS pixels (component is always square). Defaults to 120. */
+  /** Square display size in CSS pixels. Use width+height for non-square. Defaults to 120. */
   size?: number;
+  /** Display width in CSS pixels (overrides size). */
+  width?: number;
+  /** Display height in CSS pixels (overrides size). */
+  height?: number;
   alt: string;
   className?: string;
 }
@@ -19,11 +23,15 @@ export function SpriteImage({
   row,
   col,
   size = 120,
+  width,
+  height,
   alt,
   className,
 }: SpriteImageProps) {
   const [imgError, setImgError] = useState(false);
-  const style = getSpriteStyle(expansion, row, col, size);
+  const w = width ?? size;
+  const h = height ?? size;
+  const style = getSpriteStyle(expansion, row, col, w, h);
 
   if (imgError) {
     return (

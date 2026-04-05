@@ -1,30 +1,39 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 
 import { Button } from "../components/ui/button";
 
 export function OthersScreen() {
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col items-center gap-4 px-4 py-8">
-      <img
-        src="/img/title.png"
-        alt="Santorini"
-        className="w-full max-w-md object-contain"
-      />
-
       <div className="flex flex-col gap-3 w-full max-w-xs mt-4">
-        <Button asChild size="lg" className="min-h-[44px] w-full">
-          <Link to="/gods">Browse Gods</Link>
-        </Button>
-        <Button asChild size="lg" className="min-h-[44px] w-full">
-          <Link to="/game-modes">Game Modes</Link>
-        </Button>
-        <Button asChild size="lg" className="min-h-[44px] w-full">
-          <Link to="/settings">Settings</Link>
-        </Button>
+        <Link
+          to="/gods"
+          className="min-h-[44px] w-full inline-flex items-center justify-center rounded-lg bg-[#F5F3EE] text-[#0F5F95] hover:bg-[#EAE8E2] text-sm font-medium transition-colors px-4"
+        >
+          Browse Gods
+        </Link>
+        <Link
+          to="/game-modes"
+          className="min-h-[44px] w-full inline-flex items-center justify-center rounded-lg bg-[#F5F3EE] text-[#0F5F95] hover:bg-[#EAE8E2] text-sm font-medium transition-colors px-4"
+        >
+          Game Modes
+        </Link>
+        <Link
+          to="/settings"
+          className="min-h-[44px] w-full inline-flex items-center justify-center rounded-lg bg-[#F5F3EE] text-[#0F5F95] hover:bg-[#EAE8E2] text-sm font-medium transition-colors px-4"
+        >
+          Settings
+        </Link>
       </div>
 
-      <Button asChild variant="ghost" size="lg" className="min-h-[44px] mt-2">
-        <Link to="/">← Back</Link>
+      <Button
+        variant="back"
+        size="lg"
+        className="min-h-[44px] mt-2"
+        onClick={() => navigate({ to: "/" })}
+      >
+        ← Back
       </Button>
     </div>
   );

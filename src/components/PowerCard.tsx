@@ -11,7 +11,10 @@ interface PowerCardProps {
   initiallyFlipped?: boolean;
 }
 
-const CARD_SIZE = 240;
+// Card proportions derived from sprite cell dimensions (~175×300 for base, ~234×400 for others)
+// All sheets are consistently ~7:12 width-to-height ratio
+export const CARD_WIDTH = 175;
+export const CARD_HEIGHT = 300;
 
 export function PowerCard({ power, initiallyFlipped = false }: PowerCardProps) {
   const [flipped, setFlipped] = useState(initiallyFlipped);
@@ -19,7 +22,7 @@ export function PowerCard({ power, initiallyFlipped = false }: PowerCardProps) {
   return (
     <div
       className="relative cursor-pointer select-none"
-      style={{ width: CARD_SIZE, height: CARD_SIZE, perspective: "1000px" }}
+      style={{ width: CARD_WIDTH, height: CARD_HEIGHT, perspective: "1000px" }}
       onClick={() => setFlipped((f) => !f)}
       role="button"
       aria-label={
@@ -53,7 +56,8 @@ export function PowerCard({ power, initiallyFlipped = false }: PowerCardProps) {
             expansion={power.expansion}
             row={power.row}
             col={power.col}
-            size={CARD_SIZE}
+            width={CARD_WIDTH}
+            height={CARD_HEIGHT}
             alt={power.name}
           />
         </div>
@@ -67,8 +71,8 @@ export function PowerCard({ power, initiallyFlipped = false }: PowerCardProps) {
           style={{
             backfaceVisibility: "hidden",
             transform: "rotateY(180deg)",
-            backgroundColor: "#c8a96e",
-            borderColor: "#a07840",
+            backgroundColor: "#E6E5DA",
+            borderColor: "#c8c7b8",
           }}
           aria-hidden={!flipped}
         >

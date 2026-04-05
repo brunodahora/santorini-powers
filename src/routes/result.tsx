@@ -1,7 +1,7 @@
-import { Link, useNavigate, useSearch } from "@tanstack/react-router";
+import { useNavigate, useSearch } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 
-import { PowerCard } from "../components/PowerCard";
+import { CARD_WIDTH, CARD_HEIGHT, PowerCard } from "../components/PowerCard";
 import { Button } from "../components/ui/button";
 import {
   Carousel,
@@ -9,16 +9,33 @@ import {
   CarouselItem,
   type CarouselApi,
 } from "../components/ui/carousel";
-import { MATCHUPS, POWERS } from "../data/powers";
+import { MATCHUPS, POWERS, type Power } from "../data/powers";
 import { useExpansions } from "../hooks/useExpansions";
 import { pickMatchup, pickOne, pickTwo } from "../lib/randomizer";
+
+/** Renders a PowerCard scaled up to fill 65vh, preserving the sprite's exact pixel ratio. */
+function ScaledCard({ power }: { power: Power }) {
+  const targetHeight =
+    typeof window !== "undefined" ? window.innerHeight * 0.65 : CARD_HEIGHT;
+  const scale = targetHeight / CARD_HEIGHT;
+  const scaledW = CARD_WIDTH * scale;
+  const scaledH = CARD_HEIGHT * scale;
+  return (
+    <div style={{ width: scaledW, height: scaledH }}>
+      <div
+        style={{ transform: `scale(${scale})`, transformOrigin: "top left" }}
+      >
+        <PowerCard power={power} />
+      </div>
+    </div>
+  );
+}
 
 export function ResultScreen() {
   const navigate = useNavigate();
   const { mode, ids } = useSearch({ from: "/result" });
   const [activeExpansions] = useExpansions();
 
-  // Resolve power objects from URL ids
   const idList = ids
     ? ids
         .split(",")
@@ -28,7 +45,6 @@ export function ResultScreen() {
   const powers = idList.map((id) => POWERS.find((p) => p.id === id));
   const allFound = powers.length > 0 && powers.every(Boolean);
 
-  // Redirect to home if params are invalid
   useEffect(() => {
     const validModes = ["one", "two", "matchup"];
     if (!validModes.includes(mode) || !allFound) {
@@ -36,7 +52,6 @@ export function ResultScreen() {
     }
   }, [mode, allFound, navigate]);
 
-  // Carousel dot tracking
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -77,29 +92,27 @@ export function ResultScreen() {
   }
 
   return (
-    <div className="flex flex-col items-center gap-6 px-4 py-8">
-      {/* Desktop: side-by-side; Mobile with 2 cards: carousel */}
+    <div className="flex flex-col items-center gap-4 px-4 pb-8">
       {isTwoCards ? (
         <>
-          {/* Desktop layout */}
+          {/* Desktop: side-by-side */}
           <div className="hidden md:flex gap-8 justify-center">
             {resolvedPowers.map((p) => (
-              <PowerCard key={p.id} power={p} />
+              <ScaledCard key={p.id} power={p} />
             ))}
           </div>
 
-          {/* Mobile carousel */}
-          <div className="md:hidden w-full max-w-xs">
-            <Carousel setApi={setCarouselApi}>
+          {/* Mobile: carousel */}
+          <div className="md:hidden w-full flex flex-col items-center">
+            <Carousel setApi={setCarouselApi} className="w-full">
               <CarouselContent>
                 {resolvedPowers.map((p) => (
                   <CarouselItem key={p.id} className="flex justify-center">
-                    <PowerCard power={p} />
+                    <ScaledCard power={p} />
                   </CarouselItem>
                 ))}
               </CarouselContent>
             </Carousel>
-            {/* Dot indicators */}
             <div
               className="flex justify-center gap-2 mt-3"
               aria-label="Slide indicators"
@@ -121,16 +134,26 @@ export function ResultScreen() {
           </div>
         </>
       ) : (
-        <PowerCard power={resolvedPowers[0]} />
+        <div className="flex justify-center w-full">
+          <ScaledCard power={resolvedPowers[0]} />
+        </div>
       )}
 
-      {/* Actions */}
       <div className="flex gap-3 mt-2">
-        <Button size="lg" className="min-h-[44px]" onClick={reRandomize}>
-          Re-randomize
+        <Button
+          variant="back"
+          size="lg"
+          className="min-h-[44px] mt-2"
+          onClick={() => navigate({ to: "/" })}
+        >
+          ← Back
         </Button>
-        <Button asChild variant="ghost" size="lg" className="min-h-[44px]">
-          <Link to="/">← Back</Link>
+        <Button
+          size="lg"
+          className="min-h-[44px] bg-[#F5F3EE] text-[#0F5F95] hover:bg-[#EAE8E2]"
+          onClick={reRandomize}
+        >
+          Re-randomize
         </Button>
       </div>
     </div>

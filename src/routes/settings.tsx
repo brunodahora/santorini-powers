@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 
 import { Button } from "../components/ui/button";
 import { Checkbox } from "../components/ui/checkbox";
@@ -6,6 +6,7 @@ import { EXPANSIONS } from "../data/powers";
 import { useExpansions } from "../hooks/useExpansions";
 
 export function SettingsScreen() {
+  const navigate = useNavigate();
   const [activeExpansions, toggleExpansion] = useExpansions();
   const noneSelected = activeExpansions.length === 0;
 
@@ -57,14 +58,13 @@ export function SettingsScreen() {
       </ul>
 
       <Button
-        asChild={!noneSelected}
+        variant="back"
         size="lg"
-        variant="ghost"
         className="min-h-[44px] mt-2"
         disabled={noneSelected}
-        aria-disabled={noneSelected}
+        onClick={() => navigate({ to: "/" })}
       >
-        {noneSelected ? <span>← Back</span> : <Link to="/">← Back</Link>}
+        ← Back
       </Button>
     </div>
   );

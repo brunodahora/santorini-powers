@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 
 import { SpriteImage } from "../components/SpriteImage";
 import { Button } from "../components/ui/button";
@@ -6,6 +6,7 @@ import { GAME_MODES, EXPANSIONS } from "../data/powers";
 import { useExpansions } from "../hooks/useExpansions";
 
 export function GameModesScreen() {
+  const navigate = useNavigate();
   const [activeExpansions] = useExpansions();
 
   const visibleModes = GAME_MODES.filter((m) =>
@@ -17,7 +18,7 @@ export function GameModesScreen() {
 
   return (
     <div className="flex flex-col items-center gap-6 px-4 py-8 max-w-lg mx-auto w-full">
-      <h1 className="text-2xl font-semibold text-[#c8a96e]">Game Modes</h1>
+      <h1 className="text-2xl font-semibold text-white">Game Modes</h1>
 
       {visibleModes.length === 0 ? (
         <p className="text-white/60 text-sm mt-4">
@@ -55,8 +56,13 @@ export function GameModesScreen() {
         </ul>
       )}
 
-      <Button asChild variant="ghost" size="lg" className="min-h-[44px] mt-2">
-        <Link to="/">← Back</Link>
+      <Button
+        variant="back"
+        size="lg"
+        className="min-h-[44px] mt-2"
+        onClick={() => navigate({ to: "/" })}
+      >
+        ← Back
       </Button>
     </div>
   );

@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 
 import { SpriteImage } from "../components/SpriteImage";
@@ -7,8 +7,8 @@ import { EXPANSIONS, POWERS } from "../data/powers";
 import type { ExpansionId } from "../data/powers";
 import { useExpansions } from "../hooks/useExpansions";
 
-
 export function GodsListScreen() {
+  const navigate = useNavigate();
   const [activeExpansions] = useExpansions();
   const [filter, setFilter] = useState<ExpansionId | "all">("all");
 
@@ -24,7 +24,7 @@ export function GodsListScreen() {
 
   return (
     <div className="flex flex-col items-center gap-6 px-4 py-8 max-w-2xl mx-auto w-full">
-      <h1 className="text-2xl font-semibold text-[#c8a96e]">Browse Gods</h1>
+      <h1 className="text-2xl font-semibold text-white">Browse Gods</h1>
 
       {/* Filter bar */}
       <div
@@ -37,7 +37,7 @@ export function GodsListScreen() {
           className={[
             "min-h-[44px] px-4 rounded-lg text-sm font-medium transition-colors",
             filter === "all"
-              ? "bg-[#c8a96e] text-[#0a1628]"
+              ? "bg-white text-[#0a1628]"
               : "bg-white/10 text-white hover:bg-white/20",
           ].join(" ")}
           aria-pressed={filter === "all"}
@@ -51,7 +51,7 @@ export function GodsListScreen() {
             className={[
               "min-h-[44px] px-4 rounded-lg text-sm font-medium transition-colors",
               filter === exp.id
-                ? "bg-[#c8a96e] text-[#0a1628]"
+                ? "bg-white text-[#0a1628]"
                 : "bg-white/10 text-white hover:bg-white/20",
             ].join(" ")}
             aria-pressed={filter === exp.id}
@@ -93,8 +93,13 @@ export function GodsListScreen() {
         </ul>
       )}
 
-      <Button asChild variant="ghost" size="lg" className="min-h-[44px] mt-2">
-        <Link to="/">← Back</Link>
+      <Button
+        variant="back"
+        size="lg"
+        className="min-h-[44px] mt-2"
+        onClick={() => navigate({ to: "/" })}
+      >
+        ← Back
       </Button>
     </div>
   );

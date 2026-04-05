@@ -1,7 +1,6 @@
 import * as fc from "fast-check";
 import { describe, it, expect } from "vitest";
 
-
 import { SPRITE_GRID } from "../data/powers";
 import type { ExpansionId } from "../data/powers";
 
@@ -33,7 +32,7 @@ describe("Given a valid expansion, row, col, and size", () => {
     fc.assert(
       fc.property(arbParams, ({ expansion, row, col, sizePx }) => {
         const { rows, cols } = SPRITE_GRID[expansion];
-        const style = getSpriteStyle(expansion, row, col, sizePx);
+        const style = getSpriteStyle(expansion, row, col, sizePx, sizePx);
 
         expect(style.backgroundPosition).toBe(
           `-${col * sizePx}px -${row * sizePx}px`,

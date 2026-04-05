@@ -1,8 +1,40 @@
 import { useParams, useNavigate } from "@tanstack/react-router";
 
-import { SpriteImage } from "../components/SpriteImage";
+import { CARD_WIDTH, CARD_HEIGHT } from "../components/PowerCard";
 import { Button } from "../components/ui/button";
-import { GAME_MODES } from "../data/powers";
+import { GAME_MODES, type GameMode } from "../data/powers";
+import { getSpriteStyle } from "../lib/sprite";
+
+function ScaledModeCard({ mode }: { mode: GameMode }) {
+  const targetHeight =
+    typeof window !== "undefined" ? window.innerHeight * 0.65 : CARD_HEIGHT;
+  const scale = targetHeight / CARD_HEIGHT;
+  const spriteStyle = getSpriteStyle(
+    mode.expansion,
+    mode.row,
+    0,
+    CARD_WIDTH,
+    CARD_HEIGHT,
+  );
+  return (
+    <div style={{ width: CARD_WIDTH * scale, height: CARD_HEIGHT * scale }}>
+      <div
+        style={{ transform: `scale(${scale})`, transformOrigin: "top left" }}
+      >
+        <div
+          style={{
+            ...spriteStyle,
+            borderRadius: "0.75rem",
+            overflow: "hidden",
+            boxShadow: "0 10px 15px -3px rgb(0 0 0 / 0.3)",
+          }}
+          role="img"
+          aria-label={mode.name}
+        />
+      </div>
+    </div>
+  );
+}
 
 export function GameModeDetailScreen() {
   const { id } = useParams({ from: "/game-modes/$id" });
@@ -16,22 +48,13 @@ export function GameModeDetailScreen() {
   }
 
   return (
-    <div className="flex flex-col items-center gap-6 px-4 py-8 max-w-lg mx-auto w-full">
-      <h1 className="text-2xl font-semibold text-[#c8a96e]">{mode.name}</h1>
-
-      <div className="w-full flex justify-center">
-        <SpriteImage
-          expansion={mode.expansion}
-          row={mode.row}
-          col={0}
-          size={320}
-          alt={mode.name}
-          className="rounded-lg shadow-lg"
-        />
+    <div className="flex flex-col items-center gap-4 px-4 pb-8">
+      <div className="flex justify-center w-full">
+        <ScaledModeCard mode={mode} />
       </div>
 
       <Button
-        variant="ghost"
+        variant="back"
         size="lg"
         className="min-h-[44px] mt-2"
         onClick={() => navigate({ to: "/game-modes" })}

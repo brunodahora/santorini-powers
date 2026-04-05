@@ -20,14 +20,15 @@ export function getSpriteStyle(
   expansion: ExpansionId,
   row: number,
   col: number,
-  sizePx: number,
+  widthPx: number,
+  heightPx: number,
 ): SpriteStyle {
   const { rows, cols } = SPRITE_GRID[expansion];
   return {
     backgroundImage: `url('${EXPANSION_IMAGE[expansion]}')`,
-    backgroundSize: `${cols * sizePx}px ${rows * sizePx}px`,
-    backgroundPosition: `-${col * sizePx}px -${row * sizePx}px`,
-    width: `${sizePx}px`,
-    height: `${sizePx}px`,
+    backgroundSize: `${cols * widthPx}px ${rows * heightPx}px`,
+    backgroundPosition: `-${col * widthPx}px -${row * heightPx}px`,
+    width: `${widthPx}px`,
+    height: `${heightPx}px`,
   };
 }
