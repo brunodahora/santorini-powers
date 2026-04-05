@@ -11,7 +11,6 @@ import userEvent from "@testing-library/user-event";
 import { describe, it, expect, beforeEach } from "vitest";
 
 import { POWERS } from "../../data/powers";
-
 import { GodsListScreen } from "../gods";
 import { ResultScreen } from "../result";
 

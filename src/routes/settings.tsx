@@ -4,9 +4,9 @@ import { Button } from "../components/ui/button";
 import { Checkbox } from "../components/ui/checkbox";
 import { EXPANSIONS } from "../data/powers";
 import { useBackButton } from "../hooks/useBackButton";
+import { useDice } from "../hooks/useDice";
 import { useExpansions } from "../hooks/useExpansions";
 import { useSpecialConditions } from "../hooks/useSpecialConditions";
-import { useDice } from "../hooks/useDice";
 
 export function SettingsScreen() {
   const navigate = useNavigate();

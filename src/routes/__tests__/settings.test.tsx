@@ -11,7 +11,6 @@ import userEvent from "@testing-library/user-event";
 import { describe, it, expect, beforeEach } from "vitest";
 
 import { EXPANSIONS } from "../../data/powers";
-
 import { GodsListScreen } from "../gods";
 import { OthersScreen } from "../others";
 import { SettingsScreen } from "../settings";
@@ -108,7 +107,6 @@ describe("Given the settings screen with base expansion active", () => {
     const user = userEvent.setup();
     renderSettings(["base"]);
 
-    // The desktop back button has md:flex hidden — use hidden:true to find it
     const backBtn = await screen.findByRole("button", {
       name: /back/i,
       hidden: true,

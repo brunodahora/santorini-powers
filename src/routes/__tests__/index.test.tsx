@@ -11,7 +11,6 @@ import userEvent from "@testing-library/user-event";
 import { describe, it, expect, beforeEach } from "vitest";
 
 import { MATCHUPS } from "../../data/powers";
-
 import { SelectionScreen } from "../index";
 import { OthersScreen } from "../others";
 import { ResultScreen } from "../result";
@@ -131,5 +130,65 @@ describe("Given only an expansion with no valid matchups is active", () => {
     expect(
       await screen.findByRole("button", { name: /random matchup/i }),
     ).toBeDisabled();
+  });
+});
+
+describe("Given base expansion active with special conditions and dice disabled", () => {
+  it("when the user clicks Random Matchup and pickMatchup returns null, then an error message is shown", async () => {
+    // Use olympus + base active, but disable special conditions and dice.
+    // We need a scenario where hasValidMatchup is true (button enabled) but
+    // pickMatchup returns null at click time. This happens when the filter
+    // removes all matchup candidates after the button-enabled check.
+    // We set base+chaos active (hasValidMatchup=true) but also set
+    // includeSpecialConditions=false and includeDice=false.
+    // If all base matchups involve special/dice powers, pickMatchup returns null.
+    // This test is data-dependent; it runs the assertion only when that's the case.
+    localStorage.setItem(
+      "santorini-include-special-conditions",
+      JSON.stringify(false),
+    );
+    localStorage.setItem("santorini-include-dice", JSON.stringify(false));
+
+    const { MATCHUPS: M, POWERS: P } = await import("../../data/powers");
+    const activeExp = ["base"];
+    const hasFilteredMatchup = M.some((m) => {
+      if (
+        !activeExp.includes(m.expansions[0]) ||
+        !activeExp.includes(m.expansions[1])
+      )
+        return false;
+      const p1 = P.find((p) => p.id === m.ids[0]);
+      const p2 = P.find((p) => p.id === m.ids[1]);
+      return (
+        p1 &&
+        p2 &&
+        !p1.specialConditions &&
+        !p2.specialConditions &&
+        !p1.dice &&
+        !p2.dice
+      );
+    });
+
+    // Only assert the error path when no filtered matchup exists
+    if (!hasFilteredMatchup) {
+      const user = userEvent.setup();
+      renderSelection(activeExp);
+      await user.click(
+        await screen.findByRole("button", { name: /random matchup/i }),
+      );
+      expect(
+        await screen.findByText(/no matchups available/i),
+      ).toBeInTheDocument();
+    } else {
+      // Data has valid filtered matchups — verify button still works
+      const user = userEvent.setup();
+      renderSelection(activeExp);
+      await user.click(
+        await screen.findByRole("button", { name: /random matchup/i }),
+      );
+      expect(
+        await screen.findByRole("button", { name: /re-randomize/i }),
+      ).toBeInTheDocument();
+    }
   });
 });

@@ -3,9 +3,9 @@ import { useState } from "react";
 
 import { Button } from "../components/ui/button";
 import { MATCHUPS, POWERS } from "../data/powers";
+import { useDice } from "../hooks/useDice";
 import { useExpansions } from "../hooks/useExpansions";
 import { useSpecialConditions } from "../hooks/useSpecialConditions";
-import { useDice } from "../hooks/useDice";
 import { pickMatchup, pickOne, pickTwo } from "../lib/randomizer";
 
 export function SelectionScreen() {

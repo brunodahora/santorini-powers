@@ -154,3 +154,47 @@ describe("Given a shared result URL opened with different active expansions", ()
     ).toBeInTheDocument();
   });
 });
+
+describe("Given a valid matchup result URL", () => {
+  it("when the user clicks Re-randomize, then a new matchup result is shown", async () => {
+    const user = userEvent.setup();
+    renderResult({ mode: "matchup", ids: "apollo,artemis" });
+    await user.click(
+      await screen.findByRole("button", { name: /re-randomize/i }),
+    );
+    expect(
+      await screen.findByRole("button", { name: /re-randomize/i }),
+    ).toBeInTheDocument();
+  });
+});
+
+describe("Given a two-power result URL on mobile (carousel)", () => {
+  it("when rendered, then slide indicator buttons are present", async () => {
+    renderResult({ mode: "two", ids: "apollo,artemis" });
+    // Carousel dot buttons are rendered for two-card results
+    const indicators = await screen.findAllByRole("button", {
+      name: /go to card/i,
+    });
+    expect(indicators.length).toBe(2);
+  });
+
+  it("when the first slide indicator is rendered, then it has aria-current set", async () => {
+    renderResult({ mode: "two", ids: "apollo,artemis" });
+    const indicators = await screen.findAllByRole("button", {
+      name: /go to card/i,
+    });
+    // First indicator starts as current (currentSlide=0)
+    expect(indicators[0]).toHaveAttribute("aria-current", "true");
+    // Second indicator is not current
+    expect(indicators[1]).not.toHaveAttribute("aria-current");
+  });
+});
+
+describe("Given a result URL with an invalid mode", () => {
+  it("when rendered, then the user is redirected to the selection screen", async () => {
+    renderResult({ mode: "invalid" as "one", ids: "apollo" });
+    expect(
+      await screen.findByRole("button", { name: /pick one power/i }),
+    ).toBeInTheDocument();
+  });
+});

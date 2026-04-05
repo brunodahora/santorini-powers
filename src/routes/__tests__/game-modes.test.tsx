@@ -11,9 +11,8 @@ import userEvent from "@testing-library/user-event";
 import { describe, it, expect, beforeEach } from "vitest";
 
 import { GAME_MODES } from "../../data/powers";
-
-import { GameModeDetailScreen } from "../game-modes.$id";
 import { GameModesScreen } from "../game-modes";
+import { GameModeDetailScreen } from "../game-modes.$id";
 import { OthersScreen } from "../others";
 
 function renderGameModes(
@@ -144,5 +143,48 @@ describe("Given the game modes list screen", () => {
     expect(
       await screen.findByRole("link", { name: /browse gods/i }),
     ).toBeInTheDocument();
+  });
+});
+
+describe("Given no active expansions (empty game modes list)", () => {
+  it("when rendered, then an empty state message is shown", async () => {
+    // Use a single expansion that has no game modes to trigger the empty state
+    // We need activeExpansions to be non-empty (so loadExpansions doesn't default to base)
+    // but contain only expansions with no game modes.
+    // Check which expansions have no game modes:
+    const { GAME_MODES } = await import("../../data/powers");
+    const expansionWithNoModes = [
+      "olympus",
+      "poseidon",
+      "underworld",
+      "chaos",
+      "base",
+    ].find((id) => GAME_MODES.filter((m) => m.expansion === id).length === 0);
+
+    if (expansionWithNoModes) {
+      renderGameModes([expansionWithNoModes]);
+      expect(
+        await screen.findByText(/no game modes available/i),
+      ).toBeInTheDocument();
+    } else {
+      // All expansions have game modes — set a non-existent expansion key directly
+      localStorage.setItem(
+        "santorini-active-expansions",
+        JSON.stringify(["nonexistent-expansion"]),
+      );
+      const rootRoute = createRootRoute({ component: () => <Outlet /> });
+      const gameModesRoute = createRoute({
+        getParentRoute: () => rootRoute,
+        path: "/game-modes",
+        component: GameModesScreen,
+      });
+      const routeTree = rootRoute.addChildren([gameModesRoute]);
+      const history = createMemoryHistory({ initialEntries: ["/game-modes"] });
+      const router = createRouter({ routeTree, history });
+      render(<RouterProvider router={router} />);
+      expect(
+        await screen.findByText(/no game modes available/i),
+      ).toBeInTheDocument();
+    }
   });
 });

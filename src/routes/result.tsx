@@ -11,9 +11,9 @@ import {
 } from "../components/ui/carousel";
 import { MATCHUPS, POWERS, type Power } from "../data/powers";
 import { useBackButton } from "../hooks/useBackButton";
+import { useDice } from "../hooks/useDice";
 import { useExpansions } from "../hooks/useExpansions";
 import { useSpecialConditions } from "../hooks/useSpecialConditions";
-import { useDice } from "../hooks/useDice";
 import { pickMatchup, pickOne, pickTwo } from "../lib/randomizer";
 
 /** Renders a PowerCard at 2x scale, centered. */

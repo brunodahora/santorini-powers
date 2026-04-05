@@ -10,8 +10,8 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, beforeEach } from "vitest";
 
-import { GodsListScreen } from "../gods";
 import { GameModesScreen } from "../game-modes";
+import { GodsListScreen } from "../gods";
 import { SelectionScreen } from "../index";
 import { OthersScreen } from "../others";
 import { SettingsScreen } from "../settings";

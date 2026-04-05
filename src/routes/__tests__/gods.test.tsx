@@ -11,7 +11,6 @@ import userEvent from "@testing-library/user-event";
 import { describe, it, expect, beforeEach } from "vitest";
 
 import { POWERS, EXPANSIONS } from "../../data/powers";
-
 import { GodsListScreen } from "../gods";
 import { ResultScreen } from "../result";
 
@@ -198,5 +197,154 @@ describe("Given the gods list screen with no active expansions stored", () => {
     expect(
       await screen.findByRole("link", { name: baseGod.name }),
     ).toBeInTheDocument();
+  });
+});
+
+function renderGodsWithPath(
+  activeExpansions = ["base"],
+  initialPath = "/gods",
+) {
+  localStorage.setItem(
+    "santorini-active-expansions",
+    JSON.stringify(activeExpansions),
+  );
+
+  const rootRoute = createRootRoute({ component: () => <Outlet /> });
+
+  const godsRoute = createRoute({
+    getParentRoute: () => rootRoute,
+    path: "/gods",
+    component: GodsListScreen,
+    validateSearch: (search: Record<string, unknown>) => ({
+      specialConditions:
+        search.specialConditions === true ||
+        search.specialConditions === "true",
+      dice: search.dice === true || search.dice === "true",
+      expansion:
+        typeof search.expansion === "string" ? search.expansion : undefined,
+    }),
+  });
+
+  const settingsRoute = createRoute({
+    getParentRoute: () => rootRoute,
+    path: "/settings",
+    component: () => <div>Settings Screen</div>,
+  });
+
+  const othersRoute = createRoute({
+    getParentRoute: () => rootRoute,
+    path: "/others",
+    component: () => <div>Others Screen</div>,
+  });
+
+  const routeTree = rootRoute.addChildren([
+    godsRoute,
+    settingsRoute,
+    othersRoute,
+  ]);
+  const history = createMemoryHistory({ initialEntries: [initialPath] });
+  const router = createRouter({ routeTree, history });
+
+  return render(<RouterProvider router={router} />);
+}
+
+describe("Given the gods list screen in filter mode (specialConditions=true)", () => {
+  it("when rendered, then only gods with special conditions are shown", async () => {
+    renderGodsWithPath(["base"], "/gods?specialConditions=true&dice=false");
+    const specialGods = POWERS.filter((p) => p.specialConditions);
+    for (const god of specialGods) {
+      expect(
+        await screen.findByRole("link", { name: god.name }),
+      ).toBeInTheDocument();
+    }
+  });
+
+  it("when rendered, then the heading shows 'Gods with Special Conditions'", async () => {
+    renderGodsWithPath(["base"], "/gods?specialConditions=true&dice=false");
+    expect(
+      await screen.findByRole("heading", {
+        name: /gods with special conditions/i,
+      }),
+    ).toBeInTheDocument();
+  });
+
+  it("when the Back link is clicked, then they navigate to settings", async () => {
+    const user = userEvent.setup();
+    renderGodsWithPath(["base"], "/gods?specialConditions=true&dice=false");
+    const backLink = await screen.findByRole("link", {
+      name: /back/i,
+      hidden: true,
+    });
+    await user.click(backLink);
+    expect(await screen.findByText(/settings screen/i)).toBeInTheDocument();
+  });
+});
+
+describe("Given the gods list screen in filter mode (dice=true)", () => {
+  it("when rendered, then only gods with dice are shown", async () => {
+    renderGodsWithPath(
+      ["base", "chaos", "poseidon", "underworld", "olympus"],
+      "/gods?specialConditions=false&dice=true",
+    );
+    const diceGods = POWERS.filter((p) => p.dice);
+    for (const god of diceGods) {
+      expect(
+        await screen.findByRole("link", { name: god.name }),
+      ).toBeInTheDocument();
+    }
+  });
+
+  it("when rendered, then the heading shows 'Gods with Dice'", async () => {
+    renderGodsWithPath(["base"], "/gods?specialConditions=false&dice=true");
+    expect(
+      await screen.findByRole("heading", { name: /gods with dice/i }),
+    ).toBeInTheDocument();
+  });
+});
+
+describe("Given the gods list screen filtered by expansion", () => {
+  it("when rendered with expansion=base, then the heading shows the expansion name", async () => {
+    renderGodsWithPath(
+      ["base"],
+      "/gods?specialConditions=false&dice=false&expansion=base",
+    );
+    expect(
+      await screen.findByRole("heading", { name: /base powers gods/i }),
+    ).toBeInTheDocument();
+  });
+
+  it("when rendered with an unknown expansion, then the heading falls back to the expansion id", async () => {
+    renderGodsWithPath(
+      ["base"],
+      "/gods?specialConditions=false&dice=false&expansion=unknown-exp",
+    );
+    expect(
+      await screen.findByRole("heading", { name: /unknown-exp gods/i }),
+    ).toBeInTheDocument();
+  });
+
+  it("when the Back link is clicked in expansion filter mode, then they navigate to settings", async () => {
+    const user = userEvent.setup();
+    renderGodsWithPath(
+      ["base"],
+      "/gods?specialConditions=false&dice=false&expansion=base",
+    );
+    const backLink = await screen.findByRole("link", {
+      name: /back/i,
+      hidden: true,
+    });
+    await user.click(backLink);
+    expect(await screen.findByText(/settings screen/i)).toBeInTheDocument();
+  });
+});
+
+describe("Given the gods list screen with a filter that matches no gods", () => {
+  it("when rendered, then an empty state message is shown", async () => {
+    // Use an expansion filter for an expansion with no active gods
+    renderGodsWithPath(
+      ["base"],
+      "/gods?specialConditions=false&dice=false&expansion=nonexistent",
+    );
+    expect(await screen.findByText(/no gods available/i)).toBeInTheDocument();
   });
 });

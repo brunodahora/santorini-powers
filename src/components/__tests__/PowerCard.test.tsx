@@ -3,7 +3,6 @@ import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
 import type { Power } from "../../data/powers";
-
 import { PowerCard } from "../PowerCard";
 
 // Stub Image to avoid errors in jsdom
