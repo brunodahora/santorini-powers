@@ -13,11 +13,9 @@ import { MATCHUPS, POWERS, type Power } from "../data/powers";
 import { useExpansions } from "../hooks/useExpansions";
 import { pickMatchup, pickOne, pickTwo } from "../lib/randomizer";
 
-/** Renders a PowerCard scaled up to fill 65vh, preserving the sprite's exact pixel ratio. */
+/** Renders a PowerCard at 2x scale, centered. */
 function ScaledCard({ power }: { power: Power }) {
-  const targetHeight =
-    typeof window !== "undefined" ? window.innerHeight * 0.65 : CARD_HEIGHT;
-  const scale = targetHeight / CARD_HEIGHT;
+  const scale = 2;
   const scaledW = CARD_WIDTH * scale;
   const scaledH = CARD_HEIGHT * scale;
   return (
@@ -35,6 +33,7 @@ export function ResultScreen() {
   const navigate = useNavigate();
   const { mode, ids } = useSearch({ from: "/result" });
   const [activeExpansions] = useExpansions();
+  const [copied, setCopied] = useState(false);
 
   const idList = ids
     ? ids
@@ -69,6 +68,17 @@ export function ResultScreen() {
   const resolvedPowers = powers as NonNullable<(typeof powers)[number]>[];
   const isTwoCards = resolvedPowers.length === 2;
 
+  async function share() {
+    const url = window.location.href;
+    if (navigator.share) {
+      await navigator.share({ url });
+    } else {
+      await navigator.clipboard.writeText(url);
+    }
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  }
+
   function reRandomize() {
     if (mode === "one") {
       const p = pickOne(POWERS, activeExpansions);
@@ -92,58 +102,60 @@ export function ResultScreen() {
   }
 
   return (
-    <div className="flex flex-col items-center gap-4 px-4 pb-8">
-      {isTwoCards ? (
-        <>
-          {/* Desktop: side-by-side */}
-          <div className="hidden md:flex gap-8 justify-center">
-            {resolvedPowers.map((p) => (
-              <ScaledCard key={p.id} power={p} />
-            ))}
-          </div>
-
-          {/* Mobile: carousel */}
-          <div className="md:hidden w-full flex flex-col items-center">
-            <Carousel setApi={setCarouselApi} className="w-full">
-              <CarouselContent>
-                {resolvedPowers.map((p) => (
-                  <CarouselItem key={p.id} className="flex justify-center">
-                    <ScaledCard power={p} />
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-            </Carousel>
-            <div
-              className="flex justify-center gap-2 mt-3"
-              aria-label="Slide indicators"
-            >
-              {resolvedPowers.map((_, i) => (
-                <button
-                  key={i}
-                  className="w-11 h-11 flex items-center justify-center rounded-full"
-                  onClick={() => carouselApi?.scrollTo(i)}
-                  aria-label={`Go to card ${i + 1}`}
-                  aria-current={i === currentSlide ? "true" : undefined}
-                >
-                  <span
-                    className={`w-2.5 h-2.5 rounded-full transition-colors ${i === currentSlide ? "bg-amber-400" : "bg-white/40"}`}
-                  />
-                </button>
+    <div className="flex flex-col items-center w-full max-w-5xl mx-auto flex-1 px-4 pb-8">
+      {/* Card area — grows to fill available space */}
+      <div className="flex-1 flex items-center justify-center w-full">
+        {isTwoCards ? (
+          <>
+            {/* Desktop: side-by-side */}
+            <div className="hidden md:flex gap-8 justify-center">
+              {resolvedPowers.map((p) => (
+                <ScaledCard key={p.id} power={p} />
               ))}
             </div>
-          </div>
-        </>
-      ) : (
-        <div className="flex justify-center w-full">
-          <ScaledCard power={resolvedPowers[0]} />
-        </div>
-      )}
 
-      <div className="flex gap-3 mt-2">
+            {/* Mobile: carousel */}
+            <div className="md:hidden w-full flex flex-col items-center">
+              <Carousel setApi={setCarouselApi} className="w-full">
+                <CarouselContent>
+                  {resolvedPowers.map((p) => (
+                    <CarouselItem key={p.id} className="flex justify-center">
+                      <ScaledCard power={p} />
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+              </Carousel>
+              <div
+                className="flex justify-center gap-2 mt-3"
+                aria-label="Slide indicators"
+              >
+                {resolvedPowers.map((_, i) => (
+                  <button
+                    key={i}
+                    className="w-11 h-11 flex items-center justify-center rounded-full"
+                    onClick={() => carouselApi?.scrollTo(i)}
+                    aria-label={`Go to card ${i + 1}`}
+                    aria-current={i === currentSlide ? "true" : undefined}
+                  >
+                    <span
+                      className={`w-2.5 h-2.5 rounded-full transition-colors ${i === currentSlide ? "bg-white" : "bg-white/40"}`}
+                    />
+                  </button>
+                ))}
+              </div>
+            </div>
+          </>
+        ) : (
+          <ScaledCard power={resolvedPowers[0]} />
+        )}
+      </div>
+
+      {/* Buttons pinned to bottom */}
+      <div className="flex gap-3 flex-wrap justify-center py-4">
         <Button
           variant="back"
           size="lg"
-          className="min-h-[44px] mt-2"
+          className="min-h-[44px]"
           onClick={() => navigate({ to: "/" })}
         >
           ← Back
@@ -154,6 +166,13 @@ export function ResultScreen() {
           onClick={reRandomize}
         >
           Re-randomize
+        </Button>
+        <Button
+          size="lg"
+          className="min-h-[44px] bg-[#F5F3EE] text-[#0F5F95] hover:bg-[#EAE8E2]"
+          onClick={share}
+        >
+          {copied ? "Link copied!" : "Share"}
         </Button>
       </div>
     </div>

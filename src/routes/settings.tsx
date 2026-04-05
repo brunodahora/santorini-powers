@@ -1,4 +1,4 @@
-import { useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 
 import { Button } from "../components/ui/button";
 import { Checkbox } from "../components/ui/checkbox";
@@ -11,8 +11,8 @@ export function SettingsScreen() {
   const noneSelected = activeExpansions.length === 0;
 
   return (
-    <div className="flex flex-col items-center gap-6 px-4 py-8 max-w-lg mx-auto w-full">
-      <h1 className="text-2xl font-semibold text-[#c8a96e]">Settings</h1>
+    <div className="flex flex-col items-center gap-6 px-4 py-8 max-w-lg mx-auto w-full flex-1">
+      <h1 className="text-2xl font-semibold text-white">Settings</h1>
 
       {noneSelected && (
         <div
@@ -42,7 +42,7 @@ export function SettingsScreen() {
               <Link
                 to="/expansion/$id"
                 params={{ id: expansion.id }}
-                className="text-xs text-[#c8a96e] underline underline-offset-2 hover:text-[#e0c080] min-h-[44px] min-w-[44px] flex items-center justify-center shrink-0"
+                className="text-xs text-white underline underline-offset-2 hover:text-white/80 min-h-[44px] min-w-[44px] flex items-center justify-center shrink-0"
               >
                 View Gods
               </Link>
@@ -62,7 +62,7 @@ export function SettingsScreen() {
         size="lg"
         className="min-h-[44px] mt-2"
         disabled={noneSelected}
-        onClick={() => navigate({ to: "/" })}
+        onClick={() => navigate({ to: "/others" })}
       >
         ← Back
       </Button>

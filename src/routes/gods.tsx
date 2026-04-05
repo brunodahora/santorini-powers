@@ -1,14 +1,12 @@
-import { Link, useNavigate } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 
 import { SpriteImage } from "../components/SpriteImage";
-import { Button } from "../components/ui/button";
 import { EXPANSIONS, POWERS } from "../data/powers";
 import type { ExpansionId } from "../data/powers";
 import { useExpansions } from "../hooks/useExpansions";
 
 export function GodsListScreen() {
-  const navigate = useNavigate();
   const [activeExpansions] = useExpansions();
   const [filter, setFilter] = useState<ExpansionId | "all">("all");
 
@@ -23,7 +21,7 @@ export function GodsListScreen() {
   });
 
   return (
-    <div className="flex flex-col items-center gap-6 px-4 py-8 max-w-2xl mx-auto w-full">
+    <div className="flex flex-col items-center gap-6 px-4 py-8 max-w-2xl lg:max-w-4xl mx-auto w-full flex-1">
       <h1 className="text-2xl font-semibold text-white">Browse Gods</h1>
 
       {/* Filter bar */}
@@ -67,7 +65,7 @@ export function GodsListScreen() {
           No gods available. Enable expansions in Settings.
         </p>
       ) : (
-        <ul className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3 w-full">
+        <ul className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-9 gap-3 w-full">
           {visiblePowers.map((power) => (
             <li key={power.id}>
               <Link
@@ -93,14 +91,12 @@ export function GodsListScreen() {
         </ul>
       )}
 
-      <Button
-        variant="back"
-        size="lg"
-        className="min-h-[44px] mt-2"
-        onClick={() => navigate({ to: "/" })}
+      <Link
+        to="/others"
+        className="min-h-[44px] px-4 inline-flex items-center justify-center text-sm font-medium text-white/70 hover:text-white underline-offset-4 hover:underline"
       >
         ← Back
-      </Button>
+      </Link>
     </div>
   );
 }

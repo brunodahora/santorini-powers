@@ -12,10 +12,10 @@ export function RootLayout() {
         <img
           src="/img/title.png"
           alt="Santorini"
-          className={`object-contain my-4 transition-all duration-300 ${isMenu ? "w-3/4" : "w-1/4"}`}
+          className={`object-contain mt-8 mb-4 transition-all duration-300 ${isMenu ? "w-3/4 max-h-32" : "w-1/2 max-h-20"}`}
         />
       </header>
-      <main className="flex-1 flex flex-col">
+      <main className="flex-1 flex flex-col items-center justify-center">
         <Outlet />
       </main>
     </div>

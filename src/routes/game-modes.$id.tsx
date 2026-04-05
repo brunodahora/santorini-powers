@@ -48,7 +48,7 @@ export function GameModeDetailScreen() {
   }
 
   return (
-    <div className="flex flex-col items-center gap-4 px-4 pb-8">
+    <div className="flex flex-col items-center gap-4 px-4 pb-8 flex-1">
       <div className="flex justify-center w-full">
         <ScaledModeCard mode={mode} />
       </div>

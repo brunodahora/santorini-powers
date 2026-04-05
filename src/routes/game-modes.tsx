@@ -17,7 +17,7 @@ export function GameModesScreen() {
     EXPANSIONS.find((e) => e.id === id)?.name ?? id;
 
   return (
-    <div className="flex flex-col items-center gap-6 px-4 py-8 max-w-lg mx-auto w-full">
+    <div className="flex flex-col items-center gap-6 px-4 py-8 max-w-lg mx-auto w-full flex-1">
       <h1 className="text-2xl font-semibold text-white">Game Modes</h1>
 
       {visibleModes.length === 0 ? (
@@ -60,7 +60,7 @@ export function GameModesScreen() {
         variant="back"
         size="lg"
         className="min-h-[44px] mt-2"
-        onClick={() => navigate({ to: "/" })}
+        onClick={() => navigate({ to: "/others" })}
       >
         ← Back
       </Button>

@@ -65,8 +65,8 @@ export function PowerCard({ power, initiallyFlipped = false }: PowerCardProps) {
         {/* Back face */}
         <div
           className={cn(
-            "absolute inset-0 rounded-xl flex flex-col items-center justify-center gap-3 p-4",
-            "border-4 text-center",
+            "absolute inset-0 rounded-xl flex flex-col items-center justify-between gap-2 p-4",
+            "border-4 text-center overflow-hidden",
           )}
           style={{
             backfaceVisibility: "hidden",
@@ -76,10 +76,10 @@ export function PowerCard({ power, initiallyFlipped = false }: PowerCardProps) {
           }}
           aria-hidden={!flipped}
         >
-          <h2 className="text-lg font-bold text-stone-900 leading-tight">
+          <h2 className="text-base font-bold text-stone-900 leading-tight shrink-0">
             {power.name}
           </h2>
-          <p className="text-sm text-stone-800 leading-snug">
+          <p className="text-xs text-stone-800 leading-snug overflow-y-auto flex-1 w-full">
             {power.description}
           </p>
           {power.bgaSlug && (
@@ -87,7 +87,7 @@ export function PowerCard({ power, initiallyFlipped = false }: PowerCardProps) {
               href={`https://en.doc.boardgamearena.com/SantoriniPower${power.bgaSlug}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-1 text-xs font-semibold text-stone-900 underline underline-offset-2 hover:text-stone-700"
+              className="shrink-0 text-xs font-semibold text-stone-900 underline underline-offset-2 hover:text-stone-700"
               onClick={(e) => e.stopPropagation()}
             >
               Full Strategy ↗

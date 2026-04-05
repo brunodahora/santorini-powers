@@ -50,14 +50,14 @@ export function SelectionScreen() {
   }
 
   return (
-    <div className="flex flex-col items-center gap-4 px-4 py-8">
+    <div className="flex flex-col items-center gap-4 px-4 py-8 flex-1">
       <img
         src="/img/box.webp"
         alt="Santorini box art"
-        className="hidden md:block w-full max-w-sm object-contain"
+        className="w-full max-w-sm object-contain"
       />
 
-      <div className="flex flex-col gap-3 w-full max-w-xs mt-4">
+      <div className="flex flex-col gap-3 w-full max-w-xs sm:max-w-sm mt-4">
         <Button
           size="lg"
           className="min-h-[44px] w-full bg-[#F5F3EE] text-[#0F5F95] hover:bg-[#EAE8E2]"

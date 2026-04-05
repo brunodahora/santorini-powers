@@ -182,14 +182,14 @@ Incremental build-up from tooling setup → core logic → shared components →
     - Back button → `/game-modes`
     - _Requirements: 14.5, 14.6_
 
-- [ ] 15. Implement shareable result links
+- [x] 15. Implement shareable result links
   - Add "Share" button to Result Screen
   - Use Web Share API (`navigator.share`) if available, fall back to `navigator.clipboard.writeText`
   - Show brief "Link copied!" confirmation after sharing
   - Ensure result screen resolves power IDs from URL params regardless of active expansions
   - _Requirements: 15.1, 15.2, 15.3, 15.4_
 
-- [ ] 16. Mobile responsiveness and touch targets
+- [x] 16. Mobile responsiveness and touch targets
   - Audit all interactive elements to ensure minimum 44×44 CSS pixel tap targets
   - Verify layout renders correctly from 320px to 2560px viewport widths
   - _Requirements: 8.1, 8.2_
