@@ -1,8 +1,11 @@
-import { describe, it, expect } from "vitest";
 import * as fc from "fast-check";
-import { pickOne, pickTwo, pickMatchup } from "./randomizer";
+import { describe, it, expect } from "vitest";
+
+
 import { POWERS, MATCHUPS } from "../data/powers";
 import type { ExpansionId } from "../data/powers";
+
+import { pickOne, pickTwo, pickMatchup } from "./randomizer";
 
 const EXPANSION_IDS: ExpansionId[] = [
   "base",

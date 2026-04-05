@@ -1,7 +1,10 @@
-import { describe, it, expect, beforeEach } from "vitest";
 import * as fc from "fast-check";
-import { loadExpansions, saveExpansions } from "./storage";
+import { describe, it, expect, beforeEach } from "vitest";
+
 import type { ExpansionId } from "../data/powers";
+
+import { loadExpansions, saveExpansions } from "./storage";
+
 
 const EXPANSION_IDS: ExpansionId[] = [
   "base",

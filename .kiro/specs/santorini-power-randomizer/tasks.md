@@ -68,33 +68,33 @@ Incremental build-up from tooling setup → core logic → shared components →
 - [x] 4. Checkpoint — Ensure all tests pass
   - Run `npx vitest --run` and confirm all lib + hook tests pass. Ask the user if questions arise.
 
-- [ ] 5. Implement shared UI components
-  - [ ] 5.1 Implement `src/components/SpriteImage.tsx`
+- [x] 5. Implement shared UI components
+  - [x] 5.1 Implement `src/components/SpriteImage.tsx`
     - Renders a `<div>` with inline style from `getSpriteStyle`; falls back to `power.name` text on image error
     - Props: `expansion`, `row`, `col`, `size?`, `alt`, `className?`
     - _Requirements: 6.1, 6.2, 6.3, 11.1, 11.2_
 
-  - [ ] 5.2 Write unit test for SpriteImage fallback rendering
+  - [x] 5.2 Write unit test for SpriteImage fallback rendering
     - Test that when background image fails, the power name text is shown
     - _Requirements: 6.3_
 
-  - [ ] 5.3 Implement `src/components/PowerCard.tsx`
+  - [x] 5.3 Implement `src/components/PowerCard.tsx`
     - CSS 3D flip card: front shows `SpriteImage`, back shows name + description + BGA link
     - Internal `flipped` state toggled on click/tap; uses `transform: rotateY(180deg)` with `backface-visibility: hidden`
     - BGA link: `https://en.doc.boardgamearena.com/SantoriniPower${power.bgaSlug}` opens in new tab
     - Props: `power: Power`, `initiallyFlipped?: boolean`
     - _Requirements: 6.1, 6.2, 6.4, 6.5, 6.6, 6.7_
 
-  - [ ] 5.4 Write unit test for PowerCard front/back rendering
+  - [x] 5.4 Write unit test for PowerCard front/back rendering
     - Test front face shows sprite, back face shows name and BGA link after click
     - _Requirements: 6.4, 6.5_
 
-  - [ ] 5.5 Write property test for BGA link slug (Property 9)
+  - [x] 5.5 Write property test for BGA link slug (Property 9)
     - **Property 9: BGA link contains the correct slug**
     - **Validates: Requirements 6.5**
     - File: `src/data/powers.test.ts`
 
-  - [ ] 5.6 Implement `src/routes/others.tsx` — Others Screen
+  - [x] 5.6 Implement `src/routes/others.tsx` — Others Screen
     - Same visual style as Selection Screen (title image, Aegean background)
     - Three Shadcn `Button` components: "Browse Gods" → `/gods`, "Game Modes" → `/game-modes`, "Settings" → `/settings`
     - Back button → `/`
