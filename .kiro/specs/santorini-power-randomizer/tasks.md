@@ -60,12 +60,12 @@ Incremental build-up from tooling setup → core logic → shared components →
     - **Validates: Requirements 5.3**
     - File: `src/lib/randomizer.test.ts`
 
-- [ ] 3. Implement `src/hooks/useExpansions.ts`
+- [x] 3. Implement `src/hooks/useExpansions.ts`
   - React hook that reads from `loadExpansions()` on mount and exposes `[activeExpansions, toggleExpansion]`
   - Calls `saveExpansions` on every toggle
   - _Requirements: 1.7, 2.4, 2.6_
 
-- [ ] 4. Checkpoint — Ensure all tests pass
+- [x] 4. Checkpoint — Ensure all tests pass
   - Run `npx vitest --run` and confirm all lib + hook tests pass. Ask the user if questions arise.
 
 - [ ] 5. Implement shared UI components
