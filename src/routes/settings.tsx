@@ -49,8 +49,12 @@ export function SettingsScreen() {
                 {expansion.name}
               </span>
               <Link
-                to="/expansion/$id"
-                params={{ id: expansion.id }}
+                to="/gods"
+                search={{
+                  specialConditions: false,
+                  dice: false,
+                  expansion: expansion.id,
+                }}
                 className="text-xs text-white underline underline-offset-2 hover:text-white/80 min-h-[44px] min-w-[44px] flex items-center justify-center shrink-0"
               >
                 View Gods
@@ -72,7 +76,11 @@ export function SettingsScreen() {
         </span>
         <Link
           to="/gods"
-          search={{ specialConditions: true, dice: false }}
+          search={{
+            specialConditions: true,
+            dice: false,
+            expansion: undefined,
+          }}
           className="text-xs text-white underline underline-offset-2 hover:text-white/80 min-h-[44px] min-w-[44px] flex items-center justify-center shrink-0"
         >
           View Gods
@@ -91,7 +99,11 @@ export function SettingsScreen() {
         </span>
         <Link
           to="/gods"
-          search={{ specialConditions: false, dice: true }}
+          search={{
+            specialConditions: false,
+            dice: true,
+            expansion: undefined,
+          }}
           className="text-xs text-white underline underline-offset-2 hover:text-white/80 min-h-[44px] min-w-[44px] flex items-center justify-center shrink-0"
         >
           View Gods

@@ -10,10 +10,10 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, beforeEach } from "vitest";
 
-import { POWERS, EXPANSIONS } from "../data/powers";
+import { POWERS, EXPANSIONS } from "../../data/powers";
 
-import { GodsListScreen } from "./gods";
-import { ResultScreen } from "./result";
+import { GodsListScreen } from "../gods";
+import { ResultScreen } from "../result";
 
 function renderGods(activeExpansions = ["base"]) {
   localStorage.setItem(

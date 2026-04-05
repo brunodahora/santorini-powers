@@ -1,7 +1,7 @@
 import * as fc from "fast-check";
 import { describe, it } from "vitest";
 
-import { POWERS, GAME_MODES, MATCHUPS } from "./powers";
+import { POWERS, GAME_MODES, MATCHUPS } from "../powers";
 
 // Feature: santorini-power-randomizer, Property 7: Game mode sprites always use column 0
 describe("Given all game modes in GAME_MODES", () => {

@@ -5,7 +5,6 @@ import {
 } from "@tanstack/react-router";
 
 import { RootLayout } from "./routes/__root";
-import { ExpansionGodListScreen } from "./routes/expansion.$id";
 import { GameModesScreen } from "./routes/game-modes";
 import { GameModeDetailScreen } from "./routes/game-modes.$id";
 import { GodsListScreen } from "./routes/gods";
@@ -52,13 +51,9 @@ const godsRoute = createRoute({
     specialConditions:
       search.specialConditions === true || search.specialConditions === "true",
     dice: search.dice === true || search.dice === "true",
+    expansion:
+      typeof search.expansion === "string" ? search.expansion : undefined,
   }),
-});
-
-const expansionRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/expansion/$id",
-  component: ExpansionGodListScreen,
 });
 
 const gameModesRoute = createRoute({
@@ -79,7 +74,6 @@ const routeTree = rootRoute.addChildren([
   resultRoute,
   settingsRoute,
   godsRoute,
-  expansionRoute,
   gameModesRoute,
   gameModesDetailRoute,
 ]);

@@ -1,10 +1,10 @@
 import * as fc from "fast-check";
 import { describe, it, expect } from "vitest";
 
-import { SPRITE_GRID } from "../data/powers";
-import type { ExpansionId } from "../data/powers";
+import { SPRITE_GRID } from "../../data/powers";
+import type { ExpansionId } from "../../data/powers";
 
-import { getSpriteStyle } from "./sprite";
+import { getSpriteStyle } from "../sprite";
 
 const EXPANSION_IDS: ExpansionId[] = [
   "base",

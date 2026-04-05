@@ -15,7 +15,11 @@ export function OthersScreen() {
       <div className="flex flex-col gap-3 w-full max-w-xs sm:max-w-sm">
         <Link
           to="/gods"
-          search={{ specialConditions: false, dice: false }}
+          search={{
+            specialConditions: false,
+            dice: false,
+            expansion: undefined,
+          }}
           className="min-h-[44px] h-11 w-full inline-flex items-center justify-center rounded-lg bg-[#F5F3EE] text-[#0F5F95] hover:bg-[#EAE8E2] text-sm font-medium transition-colors px-4"
         >
           Browse Gods

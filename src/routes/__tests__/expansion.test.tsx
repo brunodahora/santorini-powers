@@ -10,20 +10,28 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, beforeEach } from "vitest";
 
-import { POWERS } from "../data/powers";
+import { POWERS } from "../../data/powers";
 
-import { ExpansionGodListScreen } from "./expansion.$id";
-import { ResultScreen } from "./result";
+import { GodsListScreen } from "../gods";
+import { ResultScreen } from "../result";
 
 function renderExpansion(expansionId: string) {
   const rootRoute = createRootRoute({
     component: () => <Outlet />,
   });
 
-  const expansionRoute = createRoute({
+  const godsRoute = createRoute({
     getParentRoute: () => rootRoute,
-    path: "/expansion/$id",
-    component: ExpansionGodListScreen,
+    path: "/gods",
+    component: GodsListScreen,
+    validateSearch: (search: Record<string, unknown>) => ({
+      specialConditions:
+        search.specialConditions === true ||
+        search.specialConditions === "true",
+      dice: search.dice === true || search.dice === "true",
+      expansion:
+        typeof search.expansion === "string" ? search.expansion : undefined,
+    }),
   });
 
   const resultRoute = createRoute({
@@ -43,13 +51,13 @@ function renderExpansion(expansionId: string) {
   });
 
   const routeTree = rootRoute.addChildren([
-    expansionRoute,
+    godsRoute,
     resultRoute,
     settingsRoute,
   ]);
 
   const history = createMemoryHistory({
-    initialEntries: [`/expansion/${expansionId}`],
+    initialEntries: [`/gods?expansion=${expansionId}`],
   });
 
   const router = createRouter({ routeTree, history });
@@ -61,7 +69,7 @@ beforeEach(() => {
   localStorage.setItem("santorini-active-expansions", JSON.stringify(["base"]));
 });
 
-describe("Given the expansion god list screen for the base expansion", () => {
+describe("Given the gods screen filtered to the base expansion", () => {
   it("when rendered, then all base god names are shown", async () => {
     renderExpansion("base");
 
@@ -95,7 +103,7 @@ describe("Given the expansion god list screen for the base expansion", () => {
     expect(await screen.findByText(/re-randomize/i)).toBeInTheDocument();
   });
 
-  it("when rendered, then a Back button linking to /settings is shown", async () => {
+  it("when rendered, then a Back link to /settings is shown", async () => {
     renderExpansion("base");
 
     const backLink = await screen.findByRole("link", { name: /back/i });
@@ -116,7 +124,7 @@ describe("Given the expansion god list screen for the base expansion", () => {
   });
 });
 
-describe("Given the expansion god list screen for the chaos expansion", () => {
+describe("Given the gods screen filtered to the chaos expansion", () => {
   it("when rendered, then only chaos gods are shown", async () => {
     renderExpansion("chaos");
 

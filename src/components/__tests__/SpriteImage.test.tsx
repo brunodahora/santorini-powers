@@ -1,7 +1,7 @@
 import { render, screen, act } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
-import { SpriteImage } from "./SpriteImage";
+import { SpriteImage } from "../SpriteImage";
 
 // Mock Image to simulate load/error
 class MockImage {

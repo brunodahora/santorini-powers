@@ -11,8 +11,12 @@ export function GodsListScreen() {
   const navigate = useNavigate();
   const [activeExpansions] = useExpansions();
   const [filter, setFilter] = useState<ExpansionId | "all">("all");
-  const { specialConditions: showSpecialConditions, dice: showDice } = useSearch({ from: "/gods" });
-  const isFilterMode = showSpecialConditions || showDice;
+  const {
+    specialConditions: showSpecialConditions,
+    dice: showDice,
+    expansion: expansionFilter,
+  } = useSearch({ from: "/gods" });
+  const isFilterMode = showSpecialConditions || showDice || !!expansionFilter;
   useBackButton(() => navigate({ to: isFilterMode ? "/settings" : "/others" }));
 
   const availableExpansions = EXPANSIONS.filter((e) =>
@@ -22,16 +26,25 @@ export function GodsListScreen() {
   const visiblePowers = POWERS.filter((p) => {
     if (showSpecialConditions) return p.specialConditions;
     if (showDice) return p.dice;
+    if (expansionFilter)
+      return p.expansion === (expansionFilter as ExpansionId);
     if (!activeExpansions.includes(p.expansion)) return false;
     if (filter !== "all" && p.expansion !== filter) return false;
     return true;
   });
 
+  const expansionName = expansionFilter
+    ? (EXPANSIONS.find((e) => e.id === expansionFilter)?.name ??
+      expansionFilter)
+    : null;
+
   const heading = showSpecialConditions
     ? "Gods with Special Conditions"
     : showDice
       ? "Gods with Dice"
-      : "Browse Gods";
+      : expansionName
+        ? `${expansionName} Gods`
+        : "Browse Gods";
 
   return (
     <div className="flex flex-col items-center gap-6 px-4 py-8 max-w-2xl lg:max-w-4xl mx-auto w-full flex-1">
@@ -93,14 +106,25 @@ export function GodsListScreen() {
                   expansion={power.expansion}
                   row={power.row}
                   col={power.col}
-                  size={80}
+                  width={72}
+                  height={123}
                   alt={power.name}
                   className="rounded"
                 />
                 <span className="text-xs text-white text-center leading-tight">
                   {power.name}
-                  {power.specialConditions && !showSpecialConditions && (
-                    <span aria-label="has special conditions"> *</span>
+                  {(power.specialConditions || power.dice) && (
+                    <span
+                      aria-label={[
+                        power.specialConditions && "has special conditions",
+                        power.dice && "uses dice",
+                      ]
+                        .filter(Boolean)
+                        .join(", ")}
+                    >
+                      {" "}
+                      *
+                    </span>
                   )}
                 </span>
               </Link>
@@ -110,7 +134,9 @@ export function GodsListScreen() {
       )}
 
       <Link
-        to={isFilterMode ? "/settings" : "/others"}
+        to={
+          expansionFilter ? "/settings" : isFilterMode ? "/settings" : "/others"
+        }
         className="min-h-[44px] px-4 md:inline-flex hidden items-center justify-center text-sm font-medium text-white/70 hover:text-white underline-offset-4 hover:underline"
       >
         ← Back
