@@ -100,23 +100,23 @@ Incremental build-up from tooling setup → core logic → shared components →
     - Back button → `/`
     - _Requirements: 1.6, 1.7_
 
-- [ ] 6. Set up TanStack Router and root layout
-  - [ ] 6.1 Create `src/router.ts` — TanStack Router instance with all route definitions
+- [x] 6. Set up TanStack Router and root layout
+  - [x] 6.1 Create `src/router.ts` — TanStack Router instance with all route definitions
     - Register routes: `/`, `/others`, `/result`, `/settings`, `/gods`, `/expansion/$id`, `/game-modes`, `/game-modes/$id`
     - _Requirements: 1.1_
 
-  - [ ] 6.2 Create `src/routes/__root.tsx` — root layout component
+  - [x] 6.2 Create `src/routes/__root.tsx` — root layout component
     - Full-viewport Aegean sea background (deep blue gradient/texture via global CSS)
     - Title image header (`/img/title.png`) full-width, aspect-ratio preserved
     - `<Outlet />` for child routes
     - _Requirements: 9.1, 9.2, 1.2_
 
-  - [ ] 6.3 Apply global Aegean sea background theme in `src/index.css`
+  - [x] 6.3 Apply global Aegean sea background theme in `src/index.css`
     - Deep ocean blue background color/gradient on `body` or root element
     - Shadcn CSS variable overrides for the Pantheon color palette (blues, golds, off-whites)
     - _Requirements: 9.1, 9.2, 9.4_
 
-  - [ ] 6.4 Update `src/main.tsx` to mount `RouterProvider` with the router instance
+  - [x] 6.4 Update `src/main.tsx` to mount `RouterProvider` with the router instance
     - _Requirements: 1.1_
 
 - [ ] 7. Implement static data correctness tests
